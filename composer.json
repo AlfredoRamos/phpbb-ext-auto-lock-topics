@@ -6,7 +6,7 @@
 	"version": "0.1.0",
 	"time": "2017-05-04",
 	"keywords": ["phpbb", "extension", "auto-lock", "topics", "cron"],
-	"license": "GPL-3.0+",
+	"license": "GPL-2.0",
 	"authors": [
 		{
 			"name": "Alfredo Ramos",
