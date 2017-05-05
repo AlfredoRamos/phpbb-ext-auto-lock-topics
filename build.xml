@@ -27,7 +27,7 @@
 	<!-- Abide licensing terms -->
 	<target name="fix-license">
 		<echo msg="Renaming license file" />
-		<move file="{dir}/LICENSE" tofile="{dir}/license.txt" />
+		<move file="${dir}/LICENSE" tofile="${dir}/license.txt" />
 	</target>
 
 	<!-- DO NOT EDIT BELOW THIS LINE -->
