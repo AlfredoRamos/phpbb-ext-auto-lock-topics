@@ -9,17 +9,15 @@
 
 namespace alfredoramos\autolocktopics\event;
 
+use phpbb\request\request;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
 class listener implements EventSubscriberInterface {
 
-	protected $container;
 	protected $request;
 
-	public function __construct(Container $container) {
-		$this->container = $container;
-		$this->request = $this->container->get('request');
+	public function __construct(request $request) {
+		$this->request = $request;
 	}
 
 	/**

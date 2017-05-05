@@ -2,7 +2,7 @@ services:
     alfredoramos.autolocktopics.listener:
         class: alfredoramos\autolocktopics\event\listener
         arguments:
-            - '@service_container'
+            - '@request'
         tags:
             - { name: event.listener }
 
