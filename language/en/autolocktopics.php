@@ -31,5 +31,6 @@ $lang = array_merge($lang, [
 	'ACP_AUTO_LOCK_DAYS_EXPLAIN'	=> 'Number of days since the last post.',
 	'ACP_AUTO_LOCK_FREQUENCY'		=> 'Auto-lock frequency',
 	'ACP_AUTO_LOCK_FREQUENCY_EXPLAIN' => 'Time in days between auto-lock events.',
+
 	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Topics auto-locked</strong><br />» [%d] %s'
 ]);

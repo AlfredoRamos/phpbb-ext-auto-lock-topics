@@ -1,0 +1,11 @@
+services:
+    alfredoramos.autolocktopics.cron.task.auto_lock_topics:
+        class: alfredoramos\autolocktopics\cron\task\auto_lock_topics
+        arguments:
+            - '@alfredoramos.autolocktopics.helper'
+            - '@user'
+            - '@log'
+        calls:
+            - [set_name, [cron.task.auto_lock_topics]]
+        tags:
+            - { name: cron.task }

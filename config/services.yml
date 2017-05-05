@@ -1,3 +1,6 @@
+imports:
+    - { resource: cron.yml }
+
 services:
     alfredoramos.autolocktopics.listener:
         class: alfredoramos\autolocktopics\event\listener
@@ -9,16 +12,4 @@ services:
     alfredoramos.autolocktopics.helper:
         class: alfredoramos\autolocktopics\includes\helper
         arguments:
-            - '@service_container'
-
-    alfredoramos.autolocktopics.cron.task.auto_lock_topics:
-        class: alfredoramos\autolocktopics\cron\task\auto_lock_topics
-        arguments:
-            - '@alfredoramos.autolocktopics.helper'
-            - '@user'
-            - '@language'
-            - '@log'
-        calls:
-            - [set_name, [cron.task.auto_lock_topics]]
-        tags:
-            - { name: cron.task }
+            - '@dbal.conn'

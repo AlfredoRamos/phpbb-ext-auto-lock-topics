@@ -14,8 +14,16 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface {
 
+	/** @var \phpbb\request\request $request */
 	protected $request;
 
+	/**
+	 * Event listener constructor.
+	 *
+	 * @param \phpbb\request\request $request
+	 *
+	 * @return void
+	 */
 	public function __construct(request $request) {
 		$this->request = $request;
 	}
@@ -49,22 +57,31 @@ class listener implements EventSubscriberInterface {
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
+	/**
+	 * Request and update forum data.
+	 *
+	 * @return void
+	 */
 	public function manage_forums_request_data($event) {
 		// Set auto-lock flags
 		$auto_lock_flags = 0;
 
+		// Announcements auto-lock is enabled
 		if((bool) $this->request->variable('auto_lock_announcements', 0)) {
 			$auto_lock_flags += FORUM_FLAG_PRUNE_ANNOUNCE;
 		}
-		
+
+		// Stickies auto-lock is enabled
 		if ((bool) $this->request->variable('auto_lock_stickies', 0)) {
 			$auto_lock_flags += FORUM_FLAG_PRUNE_STICKY;
 		}
-		
+
+		// Polls auto-lock is enabled
 		if ((bool) $this->request->variable('auto_lock_polls', 0)) {
 			$auto_lock_flags += FORUM_FLAG_PRUNE_POLL;
 		}
 
+		// Update forum data
 		$event['forum_data'] = array_merge([
 			'enable_auto_lock' => $this->request->variable('enable_auto_lock', 0),
 			'auto_lock_flags' => $auto_lock_flags,
@@ -73,23 +90,26 @@ class listener implements EventSubscriberInterface {
 		], $event['forum_data']);
 	}
 
+	/**
+	 * Assign and update template variables.
+	 *
+	 * @return void
+	 */
 	public function manage_forums_display_form($event) {
+		// Assign template variables
 		$event['template_data'] = array_merge([
 			'AUTO_LOCK_TOPICS_ENABLED' => (int) $event['forum_data']['enable_auto_lock'],
 			'AUTO_LOCK_ANNOUNCEMENTS' => (
-				(int) $event['forum_data']['auto_lock_flags']
-				& FORUM_FLAG_PRUNE_ANNOUNCE
+				(int) $event['forum_data']['auto_lock_flags'] & FORUM_FLAG_PRUNE_ANNOUNCE
 			),
 			'AUTO_LOCK_STICKIES' => (
-				(int) $event['forum_data']['auto_lock_flags']
-				& FORUM_FLAG_PRUNE_STICKY
+				(int) $event['forum_data']['auto_lock_flags'] & FORUM_FLAG_PRUNE_STICKY
 			),
 			'AUTO_LOCK_POLLS' => (
-				(int) $event['forum_data']['auto_lock_flags']
-				& FORUM_FLAG_PRUNE_POLL
+				(int) $event['forum_data']['auto_lock_flags'] & FORUM_FLAG_PRUNE_POLL
 			),
-			'AUTO_LOCK_DAYS' => $event['forum_data']['auto_lock_days'],
-			'AUTO_LOCK_FREQUENCY' => $event['forum_data']['auto_lock_frequency']
+			'AUTO_LOCK_DAYS' => (int) $event['forum_data']['auto_lock_days'],
+			'AUTO_LOCK_FREQUENCY' => (int) $event['forum_data']['auto_lock_frequency']
 		], $event['template_data']);
 	}
 
