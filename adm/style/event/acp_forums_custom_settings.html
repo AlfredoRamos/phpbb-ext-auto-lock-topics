@@ -1,0 +1,80 @@
+<!-- IF S_FORUM_POST -->
+<div id="forum_auto_lock_options">
+	<fieldset>
+		<legend>{L_ACP_FORUM_AUTO_LOCK_SETTINGS}</legend>
+		<dl>
+			<dt><label for="enable_auto_lock">{L_ACP_ENABLE_AUTO_LOCK}</label></dt>
+			<dd>
+			<label>
+				<input type="radio" id="enable_auto_lock" name="enable_auto_lock" value="1"<!-- IF AUTO_LOCK_TOPICS_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}
+			</label>
+			<label>
+				<input type="radio" name="enable_auto_lock" value="0"<!-- IF not AUTO_LOCK_TOPICS_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}
+			</label>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+			<label for="auto_lock_announcements">{L_ACP_AUTO_LOCK_ANNOUNCEMENTS}{L_COLON}</label>
+			</dt>
+			<dd>
+			<label>
+				<input type="radio" id="auto_lock_announcements" name="auto_lock_announcements" value="1"<!-- IF AUTO_LOCK_ANNOUNCEMENTS --> checked="checked"<!-- ENDIF --> /> {L_YES}
+			</label>
+			<label>
+				<input type="radio" name="auto_lock_announcements" value="0"<!-- IF not AUTO_LOCK_ANNOUNCEMENTS --> checked="checked"<!-- ENDIF --> /> {L_NO}
+			</label>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+			<label for="auto_lock_stickies">{L_ACP_AUTO_LOCK_STICKIES}{L_COLON}</label>
+			</dt>
+			<dd>
+			<label>
+				<input type="radio" id="auto_lock_stickies" name="auto_lock_stickies" value="1"<!-- IF AUTO_LOCK_STICKIES --> checked="checked"<!-- ENDIF --> /> {L_YES}
+			</label>
+			<label>
+				<input type="radio" name="auto_lock_stickies" value="0"<!-- IF not AUTO_LOCK_STICKIES --> checked="checked"<!-- ENDIF --> /> {L_NO}
+			</label>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+			<label for="auto_lock_polls">{L_ACP_AUTO_LOCK_POLLS}{L_COLON}</label>
+			</dt>
+			<dd>
+			<label>
+				<input type="radio" id="auto_lock_polls" name="auto_lock_polls" value="1"<!-- IF AUTO_LOCK_POLLS --> checked="checked"<!-- ENDIF --> /> {L_YES}
+			</label>
+			<label>
+				<input type="radio" name="auto_lock_polls" value="0"<!-- IF not AUTO_LOCK_POLLS --> checked="checked"<!-- ENDIF --> /> {L_NO}
+			</label>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+				<label for="auto_lock_days">{L_ACP_AUTO_LOCK_DAYS}{L_COLON}</label>
+				<br /><span>{L_ACP_AUTO_LOCK_DAYS_EXPLAIN}</span>
+			</dt>
+			<dd>
+			<input type="number" id="auto_lock_days" name="auto_lock_days" maxlength="4" min="0" max="9999" value="<!-- IF AUTO_LOCK_DAYS -->{AUTO_LOCK_DAYS}<!-- ELSE -->0<!-- ENDIF -->" />
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+			<label for="auto_lock_frequency">{L_ACP_AUTO_LOCK_FREQUENCY}{L_COLON}</label>
+			<br /><span>{L_ACP_AUTO_LOCK_FREQUENCY_EXPLAIN}</span>
+			</dt>
+			<dd>
+			<input type="number" id="auto_lock_frequency" name="auto_lock_frequency" maxlength="4" min="0" max="9999" value="<!-- IF AUTO_LOCK_FREQUENCY -->{AUTO_LOCK_FREQUENCY}<!-- ELSE -->0<!-- ENDIF -->" />
+			</dd>
+		</dl>
+	</fieldset>
+</div>
+<!-- ENDIF -->
