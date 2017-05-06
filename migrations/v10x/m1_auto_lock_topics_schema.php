@@ -11,12 +11,14 @@ namespace alfredoramos\autolocktopics\migrations\v10x;
 
 use phpbb\db\migration\migration;
 
-class m1_auto_lock_topics_schema extends migration {
+class m1_auto_lock_topics_schema extends migration
+{
 
 	/**
 	 * Update forums table schema
 	 */
-	public function update_schema() {
+	public function update_schema()
+	{
 		return [
 			'add_columns'	=> [
 				FORUMS_TABLE => [
@@ -33,7 +35,8 @@ class m1_auto_lock_topics_schema extends migration {
 	/**
 	 * Rever forums table schema
 	 */
-	public function revert_schema() {
+	public function revert_schema()
+	{
 		return [
 			'drop_columns'	=> [
 				FORUMS_TABLE	=> [

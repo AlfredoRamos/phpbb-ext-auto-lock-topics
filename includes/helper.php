@@ -11,7 +11,8 @@ namespace alfredoramos\autolocktopics\includes;
 
 use phpbb\db\driver\factory as database;
 
-class helper {
+class helper
+{
 
 	/** @var \phpbb\db\driver\factory $db */
 	protected $db;
@@ -23,7 +24,8 @@ class helper {
 	 *
 	 * @return void
 	 */
-	public function __construct(database $db) {
+	public function __construct(database $db)
+	{
 		$this->db = $db;
 	}
 
@@ -35,7 +37,8 @@ class helper {
 	 *
 	 * @return array
 	 */
-	public function forum_data($options = []) {
+	public function forum_data($options = [])
+	{
 		// Merge default options with given options
 		$options = array_merge([
 			'forum_id'			=> 0,
@@ -46,17 +49,20 @@ class helper {
 		$options['forum_id'] = (int) $options['forum_id'];
 		$options['auto_lock_next'] = (int) $options['auto_lock_next'];
 
-		$sql = 'SELECT forum_id, forum_name, enable_auto_lock, auto_lock_flags, auto_lock_next, auto_lock_days, auto_lock_frequency
-			FROM ' . FORUMS_TABLE . '
-			WHERE enable_auto_lock = 1';
+		$sql = 'SELECT forum_id, forum_name, enable_auto_lock,
+				auto_lock_flags, auto_lock_next, auto_lock_days, auto_lock_frequency
+				FROM ' . FORUMS_TABLE . '
+				WHERE enable_auto_lock = 1';
 
 		// Get a specific row
-		if ($options['forum_id'] > 0) {
+		if ($options['forum_id'] > 0)
+		{
 			$sql .= ' AND forum_id = ' . $options['forum_id'];
 		}
 
 		// Get rows older than the given date
-		if ($options['auto_lock_next'] > 0) {
+		if ($options['auto_lock_next'] > 0)
+		{
 			$sql .= ' AND auto_lock_next < ' . $options['auto_lock_next'];
 		}
 
@@ -65,9 +71,12 @@ class helper {
 
 		// Check if the just one row was requested,
 		// otherwise return an array of forums
-		if ($options['forum_id'] > 0) {
+		if ($options['forum_id'] > 0)
+		{
 			$forum_data = $this->db->sql_fetchrow($result);
-		} else {
+		}
+		else
+		{
 			$forum_data = $this->db->sql_fetchrowset($result);
 		}
 
@@ -86,14 +95,16 @@ class helper {
 	 *
 	 * @return void
 	 */
-	public function lock_topics($forum_id = 0, $flags = 0, $lock_date = 0) {
+	public function lock_topics($forum_id = 0, $flags = 0, $lock_date = 0)
+	{
 		// Cast parameters
 		$forum_id = (int) $forum_id;
 		$flags = (int) $flags;
 		$lock_date = (int) $lock_date;
 
 		// Invalid forum ID
-		if ($forum_id <= 0) {
+		if ($forum_id <= 0)
+		{
 			return;
 		}
 
@@ -105,37 +116,40 @@ class helper {
 		$type = [];
 
 		// Check if announcements auto-lock is enabled
-		if (!(bool) ($flags & FORUM_FLAG_PRUNE_ANNOUNCE)) {
+		if (!(bool) ($flags & FORUM_FLAG_PRUNE_ANNOUNCE))
+		{
 			$type[] = POST_ANNOUNCE;
 			$type[] = POST_GLOBAL;
 		}
 
 		// Check if stickies auto-lock is enabled
-		if (!(bool) ($flags & FORUM_FLAG_PRUNE_STICKY)) {
+		if (!(bool) ($flags & FORUM_FLAG_PRUNE_STICKY))
+		{
 			$type[] = POST_STICKY;
 		}
 
-		$sql = 'UPDATE ' . TOPICS_TABLE .
-			' SET ' . $this->db->sql_build_array('UPDATE', $data) .
-			' WHERE ' . $this->db->sql_in_set('forum_id', [$forum_id]) .
-			' AND topic_status = ' . ITEM_UNLOCKED;
+		$sql = 'UPDATE ' . TOPICS_TABLE . '
+			SET ' . $this->db->sql_build_array('UPDATE', $data) . '
+			WHERE ' . $this->db->sql_in_set('forum_id', [$forum_id]) . '
+			AND topic_status = ' . ITEM_UNLOCKED;
 
 		// If announcements or stickies auto-lock were disabled
 		// ignore them in the SQL query
-		if (!empty($type)) {
+		if (!empty($type))
+		{
 			$sql .= ' AND ' . $this->db->sql_in_set('topic_type', $type, true);
 		}
 
 		// Start
 		// Wrap the condition to check
 		// whether is a poll or a normal post
-		$sql .= ' AND (';
-		$sql .= '(poll_start = 0
+		$sql .= ' AND ((poll_start = 0
 			AND topic_last_post_time < ' . $lock_date . ')';
 
 		// Check if polls auto-lock is enabled
-		if ((bool) ($flags & FORUM_FLAG_PRUNE_POLL)) {
-			$sql .= 'OR (poll_start > 0
+		if ((bool) ($flags & FORUM_FLAG_PRUNE_POLL))
+		{
+			$sql .= ' OR (poll_start > 0
 				AND poll_last_vote < ' . $lock_date . ')';
 		}
 		// End
@@ -153,7 +167,8 @@ class helper {
 	 *
 	 * @return void
 	 */
-	public function update_next_lock_date($forum_id = 0, $next_lock = 0) {
+	public function update_next_lock_date($forum_id = 0, $next_lock = 0)
+	{
 		// Cast parameters
 		$forum_id = (int) $forum_id;
 		$next_lock = (int) $next_lock;
@@ -161,9 +176,9 @@ class helper {
 		// New forum data
 		$data = ['auto_lock_next' => $next_lock];
 
-		$sql = 'UPDATE ' . FORUMS_TABLE .
-			' SET ' . $this->db->sql_build_array('UPDATE', $data) .
-			' WHERE forum_id = ' . $forum_id;
+		$sql = 'UPDATE ' . FORUMS_TABLE . '
+			SET ' . $this->db->sql_build_array('UPDATE', $data) . '
+			WHERE forum_id = ' . $forum_id;
 
 		$this->db->sql_query($sql);
 	}

@@ -14,7 +14,8 @@ use phpbb\cron\task\base as task_base;
 use phpbb\user;
 use phpbb\log\log;
 
-class auto_lock_topics extends task_base {
+class auto_lock_topics extends task_base
+{
 
 	/** @var \alfredoramos\autolocktopics\includes\helper $auto_lock_helper */
 	protected $auto_lock_helper;
@@ -34,7 +35,8 @@ class auto_lock_topics extends task_base {
 	 *
 	 * @return void
 	 */
-	public function __construct(auto_lock_helper $auto_lock_helper, user $user, log $log) {
+	public function __construct(auto_lock_helper $auto_lock_helper, user $user, log $log)
+	{
 		$this->auto_lock_helper = $auto_lock_helper;
 		$this->user = $user;
 		$this->log = $log;
@@ -45,7 +47,8 @@ class auto_lock_topics extends task_base {
 	 *
 	 * @return void
 	 */
-	public function run() {
+	public function run()
+	{
 		// Check if it should run
 		$forums = $this->auto_lock_helper->forum_data([
 			'auto_lock_next' => time()
@@ -53,12 +56,14 @@ class auto_lock_topics extends task_base {
 
 		// It there's no forums that need to
 		// lock its topics, stop execution
-		if (empty($forums)) {
+		if (empty($forums))
+		{
 			return;
 		}
 
 		// Iterate over each forum to lock its topics
-		foreach ($forums as $forum) {
+		foreach ($forums as $forum)
+		{
 			// Cast values
 			$forum['forum_id'] = (int) $forum['forum_id'];
 			$forum['auto_lock_flags'] = (int) $forum['auto_lock_flags'];
@@ -93,7 +98,8 @@ class auto_lock_topics extends task_base {
 	/**
 	 * Check if the cron task can be executed
 	 */
-	public function is_runnable() {
+	public function is_runnable()
+	{
 		return true;
 	}
 

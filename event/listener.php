@@ -12,7 +12,8 @@ namespace alfredoramos\autolocktopics\event;
 use phpbb\request\request;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class listener implements EventSubscriberInterface {
+class listener implements EventSubscriberInterface
+{
 
 	/** @var \phpbb\request\request $request */
 	protected $request;
@@ -24,7 +25,8 @@ class listener implements EventSubscriberInterface {
 	 *
 	 * @return void
 	 */
-	public function __construct(request $request) {
+	public function __construct(request $request)
+	{
 		$this->request = $request;
 	}
 
@@ -33,7 +35,8 @@ class listener implements EventSubscriberInterface {
 	 *
 	 * @return array
 	 */
-	static public function getSubscribedEvents() {
+	static public function getSubscribedEvents()
+	{
 		return [
 			'core.user_setup' => 'user_setup',
 			'core.acp_manage_forums_request_data' => 'manage_forums_request_data',
@@ -48,7 +51,8 @@ class listener implements EventSubscriberInterface {
 	 *
 	 * @return void
 	 */
-	public function user_setup($event) {
+	public function user_setup($event)
+	{
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = [
 			'ext_name'	=> 'alfredoramos/autolocktopics',
@@ -62,22 +66,26 @@ class listener implements EventSubscriberInterface {
 	 *
 	 * @return void
 	 */
-	public function manage_forums_request_data($event) {
+	public function manage_forums_request_data($event)
+	{
 		// Set auto-lock flags
 		$auto_lock_flags = 0;
 
 		// Announcements auto-lock is enabled
-		if((bool) $this->request->variable('auto_lock_announcements', 0)) {
+		if((bool) $this->request->variable('auto_lock_announcements', 0))
+		{
 			$auto_lock_flags += FORUM_FLAG_PRUNE_ANNOUNCE;
 		}
 
 		// Stickies auto-lock is enabled
-		if ((bool) $this->request->variable('auto_lock_stickies', 0)) {
+		if ((bool) $this->request->variable('auto_lock_stickies', 0))
+		{
 			$auto_lock_flags += FORUM_FLAG_PRUNE_STICKY;
 		}
 
 		// Polls auto-lock is enabled
-		if ((bool) $this->request->variable('auto_lock_polls', 0)) {
+		if ((bool) $this->request->variable('auto_lock_polls', 0))
+		{
 			$auto_lock_flags += FORUM_FLAG_PRUNE_POLL;
 		}
 
@@ -95,7 +103,8 @@ class listener implements EventSubscriberInterface {
 	 *
 	 * @return void
 	 */
-	public function manage_forums_display_form($event) {
+	public function manage_forums_display_form($event)
+	{
 		// Assign template variables
 		$event['template_data'] = array_merge([
 			'AUTO_LOCK_TOPICS_ENABLED' => (int) $event['forum_data']['enable_auto_lock'],

@@ -13,24 +13,28 @@ use phpbb_test_case;
 use alfredoramos\autolocktopics\event\listener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class listener_test extends phpbb_test_case {
+class listener_test extends phpbb_test_case
+{
 
 	protected $request;
 
-	public function setUp() {
+	public function setUp()
+	{
 		parent::setUp();
 
 		$this->request = $this->getMock('\phpbb\request\request');
 	}
 
-	public function test_instance() {
+	public function test_instance()
+	{
 		$this->assertInstanceOf(
 			EventSubscriberInterface::class,
 			new listener($this->request)
 		);
 	}
 
-	public function test_suscribed_events() {
+	public function test_suscribed_events()
+	{
 		$this->assertSame(
 			[
 				'core.user_setup',
