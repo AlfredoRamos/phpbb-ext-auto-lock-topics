@@ -49,10 +49,9 @@ class helper
 		$options['forum_id'] = (int) $options['forum_id'];
 		$options['auto_lock_next'] = (int) $options['auto_lock_next'];
 
-		$sql = 'SELECT forum_id, forum_name, enable_auto_lock,
-				auto_lock_flags, auto_lock_next, auto_lock_days, auto_lock_frequency
-				FROM ' . FORUMS_TABLE . '
-				WHERE enable_auto_lock = 1';
+		$sql = 'SELECT forum_id, forum_name, enable_auto_lock, auto_lock_flags, auto_lock_next, auto_lock_days, auto_lock_frequency
+			FROM ' . FORUMS_TABLE . '
+			WHERE enable_auto_lock = 1';
 
 		// Get a specific row
 		if ($options['forum_id'] > 0)

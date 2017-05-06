@@ -16,6 +16,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class listener_test extends phpbb_test_case
 {
 
+	/** @var \phpbb\request\request $request */
 	protected $request;
 
 	public function setUp()
