@@ -24,7 +24,7 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-	'ACP_FORUM_AUTO_LOCK_SETTINGS'	=> 'Auto-Lock settings',
+	'ACP_FORUM_AUTO_LOCK_SETTINGS'	=> 'Auto-lock settings',
 	'ACP_ENABLE_AUTO_LOCK'			=> 'Enable auto-lock',
 	'ACP_AUTO_LOCK_ANNOUNCEMENTS'	=> 'Auto-lock announcements',
 	'ACP_AUTO_LOCK_STICKIES'		=> 'Auto-lock stickies',
