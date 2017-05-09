@@ -9,7 +9,7 @@
 
 namespace alfredoramos\autolocktopics\cron\task;
 
-use alfredoramos\autolocktopics\includes\helper as auto_lock_helper;
+use alfredoramos\autolocktopics\includes\helper;
 use phpbb\cron\task\base as task_base;
 use phpbb\user;
 use phpbb\log\log;
@@ -17,8 +17,8 @@ use phpbb\log\log;
 class auto_lock_topics extends task_base
 {
 
-	/** @var \alfredoramos\autolocktopics\includes\helper $auto_lock_helper */
-	protected $auto_lock_helper;
+	/** @var \alfredoramos\autolocktopics\includes\helper $helper */
+	protected $helper;
 
 	/** @var \phpbb\user $user */
 	protected $user;
@@ -35,9 +35,9 @@ class auto_lock_topics extends task_base
 	 *
 	 * @return void
 	 */
-	public function __construct(auto_lock_helper $auto_lock_helper, user $user, log $log)
+	public function __construct(helper $helper, user $user, log $log)
 	{
-		$this->auto_lock_helper = $auto_lock_helper;
+		$this->helper = $helper;
 		$this->user = $user;
 		$this->log = $log;
 	}
@@ -50,7 +50,7 @@ class auto_lock_topics extends task_base
 	public function run()
 	{
 		// Check if it should run
-		$forums = $this->auto_lock_helper->forum_data([
+		$forums = $this->helper->forum_data([
 			'auto_lock_next' => time()
 		]);
 
@@ -68,19 +68,19 @@ class auto_lock_topics extends task_base
 			$forum['forum_id'] = (int) $forum['forum_id'];
 			$forum['auto_lock_flags'] = (int) $forum['auto_lock_flags'];
 			$forum['auto_lock_days'] = (int) $forum['auto_lock_days'];
-			$forum['auto_lock_frequency'] = (int) $forum['auto_lock_frequency'];
+			$forum['auto_lock_freq'] = (int) $forum['auto_lock_freq'];
 
 			// Lock the topics
-			$this->auto_lock_helper->lock_topics(
+			$this->helper->lock_topics(
 				$forum['forum_id'],
 				$forum['auto_lock_flags'],
 				(time() - ($forum['auto_lock_days'] * (24 * 60 * 60)))
 			);
 
 			// Update the next lock date
-			$this->auto_lock_helper->update_next_lock_date(
+			$this->helper->update_next_lock_date(
 				$forum['forum_id'],
-				(time() + ($forum['auto_lock_frequency'] * (24 * 60 * 60)))
+				(time() + ($forum['auto_lock_freq'] * (24 * 60 * 60)))
 			);
 
 			// Add an entry in the admin log

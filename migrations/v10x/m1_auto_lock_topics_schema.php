@@ -26,7 +26,7 @@ class m1_auto_lock_topics_schema extends migration
 					'auto_lock_flags'	=> ['USINT', 0],
 					'auto_lock_next'	=> ['TIMESTAMP', 0],
 					'auto_lock_days'	=> ['USINT', 90],
-					'auto_lock_frequency'	=> ['USINT', 7]
+					'auto_lock_freq'	=> ['USINT', 7]
 				]
 			]
 		];
@@ -44,7 +44,7 @@ class m1_auto_lock_topics_schema extends migration
 					'auto_lock_flags',
 					'auto_lock_next',
 					'auto_lock_days',
-					'auto_lock_frequency'
+					'auto_lock_freq'
 				]
 			]
 		];

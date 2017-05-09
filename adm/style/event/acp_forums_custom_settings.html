@@ -47,6 +47,7 @@
 		<dl>
 			<dt>
 				<label for="auto_lock_polls">{L_ACP_AUTO_LOCK_POLLS}{L_COLON}</label>
+				<br /><span>{L_ACP_AUTO_LOCK_POLLS_EXPLAIN}</span>
 			</dt>
 			<dd>
 				<label>
@@ -64,17 +65,17 @@
 				<br /><span>{L_ACP_AUTO_LOCK_DAYS_EXPLAIN}</span>
 			</dt>
 			<dd>
-				<input type="number" id="auto_lock_days" name="auto_lock_days" maxlength="4" min="0" max="9999" value="<!-- IF AUTO_LOCK_DAYS -->{AUTO_LOCK_DAYS}<!-- ELSE -->0<!-- ENDIF -->" />
+				<input type="number" id="auto_lock_days" name="auto_lock_days" maxlength="4" min="0" max="9999" value="<!-- IF AUTO_LOCK_DAYS -->{AUTO_LOCK_DAYS}<!-- ELSE -->0<!-- ENDIF -->" /> {L_DAYS}
 			</dd>
 		</dl>
 
 		<dl>
 			<dt>
-				<label for="auto_lock_frequency">{L_ACP_AUTO_LOCK_FREQUENCY}{L_COLON}</label>
-				<br /><span>{L_ACP_AUTO_LOCK_FREQUENCY_EXPLAIN}</span>
+				<label for="auto_lock_freq">{L_ACP_AUTO_LOCK_FREQ}{L_COLON}</label>
+				<br /><span>{L_ACP_AUTO_LOCK_FREQ_EXPLAIN}</span>
 			</dt>
 			<dd>
-				<input type="number" id="auto_lock_frequency" name="auto_lock_frequency" maxlength="4" min="0" max="9999" value="<!-- IF AUTO_LOCK_FREQUENCY -->{AUTO_LOCK_FREQUENCY}<!-- ELSE -->0<!-- ENDIF -->" />
+				<input type="number" id="auto_lock_freq" name="auto_lock_freq" maxlength="4" min="0" max="9999" value="<!-- IF AUTO_LOCK_FREQ -->{AUTO_LOCK_FREQ}<!-- ELSE -->0<!-- ENDIF -->" /> {L_DAYS}
 			</dd>
 		</dl>
 	</fieldset>

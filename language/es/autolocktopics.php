@@ -29,10 +29,11 @@ $lang = array_merge($lang, [
 	'ACP_AUTO_LOCK_ANNOUNCEMENTS'	=> 'Cierre automático de anuncios',
 	'ACP_AUTO_LOCK_STICKIES'		=> 'Cierre automático de notas',
 	'ACP_AUTO_LOCK_POLLS'			=> 'Cierre automático de encuestas',
+	'ACP_AUTO_LOCK_POLLS_EXPLAIN'	=> 'Cierra encuestas no votadas después de la vigencia especificada.',
 	'ACP_AUTO_LOCK_DAYS'			=> 'Vigencia de temas',
 	'ACP_AUTO_LOCK_DAYS_EXPLAIN'	=> 'Número de días que se mantendrá el tema sin mensajes nuevos antes del cierre automático.',
-	'ACP_AUTO_LOCK_FREQUENCY'		=> 'Frecuencia del cierre automático',
-	'ACP_AUTO_LOCK_FREQUENCY_EXPLAIN' => 'Tiempo en días transcurrido entre los cierres automáticos de temas.',
+	'ACP_AUTO_LOCK_FREQ'		=> 'Frecuencia del cierre automático',
+	'ACP_AUTO_LOCK_FREQ_EXPLAIN' => 'Tiempo en días transcurrido entre los cierres automáticos de temas.',
 
 	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Temas cerrados automáticamente</strong><br />» [%d] %s'
 ]);

@@ -94,7 +94,7 @@ class listener implements EventSubscriberInterface
 			'enable_auto_lock' => $this->request->variable('enable_auto_lock', 0),
 			'auto_lock_flags' => $auto_lock_flags,
 			'auto_lock_days' => $this->request->variable('auto_lock_days', 0),
-			'auto_lock_frequency' => $this->request->variable('auto_lock_frequency', 0)
+			'auto_lock_freq' => $this->request->variable('auto_lock_freq', 0)
 		], $event['forum_data']);
 	}
 
@@ -118,7 +118,7 @@ class listener implements EventSubscriberInterface
 				(int) $event['forum_data']['auto_lock_flags'] & FORUM_FLAG_PRUNE_POLL
 			),
 			'AUTO_LOCK_DAYS' => (int) $event['forum_data']['auto_lock_days'],
-			'AUTO_LOCK_FREQUENCY' => (int) $event['forum_data']['auto_lock_frequency']
+			'AUTO_LOCK_FREQ' => (int) $event['forum_data']['auto_lock_freq']
 		], $event['template_data']);
 	}
 
