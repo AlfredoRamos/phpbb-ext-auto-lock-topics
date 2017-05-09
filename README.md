@@ -21,6 +21,18 @@ Auto-lock Topics Extension for phpBB 3.2.x
 
 It will run automatically using phpBB's cron functionality.
 
+### Preview
+
+[![Forums](https://i.imgur.com/aBjwVBpm.png)](https://i.imgur.com/aBjwVBp.png)
+
+[![Forum settings](https://i.imgur.com/OjCc15nm.png)](https://i.imgur.com/OjCc15n.png)
+
+[![Topics loked](https://i.imgur.com/qSPIC67m.png)](https://i.imgur.com/qSPIC67.png)
+
+[![Admin log](https://i.imgur.com/qPtS19im.png)](https://i.imgur.com/qPtS19i.png)
+
+*(Click to view in full size)*
+
 ### Configuration
 
 - Go to your `Administration Control Panel` > `Forums` > `Manage Forums`.
