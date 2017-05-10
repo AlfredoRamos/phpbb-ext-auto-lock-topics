@@ -49,6 +49,11 @@ class helper
 		$options['forum_id'] = (int) $options['forum_id'];
 		$options['auto_lock_next'] = (int) $options['auto_lock_next'];
 
+		// At least one of the two options must be given
+		if ($options['forum_id'] <= 0 && $options['auto_lock_next'] <= 0) {
+			return;
+		}
+
 		$sql = 'SELECT forum_id, forum_name, enable_auto_lock, auto_lock_flags, auto_lock_next, auto_lock_days, auto_lock_freq
 			FROM ' . FORUMS_TABLE . '
 			WHERE enable_auto_lock = 1';
@@ -172,6 +177,12 @@ class helper
 		$forum_id = (int) $forum_id;
 		$next_lock = (int) $next_lock;
 
+		// Forum ID must exist and next lock
+		// date must be in the future
+		if ($forum_id <= 0 || $next_lock <= time()) {
+			return;
+		}
+
 		// New forum data
 		$data = ['auto_lock_next' => $next_lock];
 
@@ -181,4 +192,5 @@ class helper
 
 		$this->db->sql_query($sql);
 	}
+
 }
