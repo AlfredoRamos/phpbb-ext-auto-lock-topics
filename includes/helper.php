@@ -97,7 +97,7 @@ class helper
 	 * @param integer	$flags
 	 * @param integer	$lock_date
 	 *
-	 * @return void
+	 * @return bool
 	 */
 	public function lock_topics($forum_id = 0, $flags = 0, $lock_date = 0)
 	{
@@ -109,7 +109,7 @@ class helper
 		// Invalid forum ID
 		if ($forum_id <= 0)
 		{
-			return;
+			return false;
 		}
 
 		// New topic data
@@ -161,6 +161,8 @@ class helper
 		$sql .= ')';
 
 		$this->db->sql_query($sql);
+
+		return ((int) $this->db->sql_affectedrows() > 0);
 	}
 
 	/**

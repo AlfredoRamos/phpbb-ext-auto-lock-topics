@@ -71,7 +71,7 @@ class auto_lock_topics extends task_base
 			$forum['auto_lock_freq'] = (int) $forum['auto_lock_freq'];
 
 			// Lock the topics
-			$this->helper->lock_topics(
+			$locked = $this->helper->lock_topics(
 				$forum['forum_id'],
 				$forum['auto_lock_flags'],
 				(time() - ($forum['auto_lock_days'] * (24 * 60 * 60)))
@@ -83,15 +83,18 @@ class auto_lock_topics extends task_base
 				(time() + ($forum['auto_lock_freq'] * (24 * 60 * 60)))
 			);
 
-			// Add an entry in the admin log
-			$this->log->add(
-				'admin',
-				$this->user->data['user_id'],
-				$this->user->ip,
-				'LOG_AUTO_LOCK_TOPIC',
-				time(),
-				[$forum['forum_name']]
-			);
+			if ($locked)
+			{
+				// Add an entry in the admin log
+				$this->log->add(
+					'admin',
+					$this->user->data['user_id'],
+					$this->user->ip,
+					'LOG_AUTO_LOCK_TOPIC',
+					time(),
+					[$forum['forum_name']]
+				);
+			}
 		}
 	}
 
