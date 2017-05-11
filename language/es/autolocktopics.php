@@ -35,5 +35,5 @@ $lang = array_merge($lang, [
 	'ACP_AUTO_LOCK_FREQ'		=> 'Frecuencia del cierre automático',
 	'ACP_AUTO_LOCK_FREQ_EXPLAIN' => 'Tiempo en días transcurrido entre los cierres automáticos de temas.',
 
-	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Temas cerrados automáticamente</strong><br />» [%d] %s'
+	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Temas cerrados automáticamente</strong><br />» %s'
 ]);

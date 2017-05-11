@@ -90,7 +90,7 @@ class auto_lock_topics extends task_base
 				$this->user->ip,
 				'LOG_AUTO_LOCK_TOPIC',
 				time(),
-				[$forum['forum_id'], $forum['forum_name']]
+				[$forum['forum_name']]
 			);
 		}
 	}
