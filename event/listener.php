@@ -38,27 +38,9 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return [
-			'core.user_setup' => 'user_setup',
 			'core.acp_manage_forums_request_data' => 'manage_forums_request_data',
 			'core.acp_manage_forums_display_form' => 'manage_forums_display_form'
 		];
-	}
-
-	/**
-	 * Load language files and modify user data on every page.
-	 *
-	 * @param object	$event
-	 *
-	 * @return void
-	 */
-	public function user_setup($event)
-	{
-		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = [
-			'ext_name'	=> 'alfredoramos/autolocktopics',
-			'lang_set'	=> 'autolocktopics'
-		];
-		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
 	/**
