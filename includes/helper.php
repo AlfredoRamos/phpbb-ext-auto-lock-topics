@@ -51,7 +51,7 @@ class helper
 
 		// At least one of the two options must be given
 		if ($options['forum_id'] <= 0 && $options['auto_lock_next'] <= 0) {
-			return;
+			return [];
 		}
 
 		$sql = 'SELECT forum_id, forum_name, enable_auto_lock, auto_lock_flags, auto_lock_next, auto_lock_days, auto_lock_freq
@@ -71,7 +71,6 @@ class helper
 		}
 
 		$result = $this->db->sql_query($sql);
-		$forum_data = [];
 
 		// Check if the just one row was requested,
 		// otherwise return an array of forums

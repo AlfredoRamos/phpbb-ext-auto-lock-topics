@@ -72,19 +72,19 @@ class listener implements EventSubscriberInterface
 		$auto_lock_flags = 0;
 
 		// Announcements auto-lock is enabled
-		if((bool) $this->request->variable('auto_lock_announcements', 0))
+		if($this->request->variable('auto_lock_announcements', 0))
 		{
 			$auto_lock_flags += FORUM_FLAG_PRUNE_ANNOUNCE;
 		}
 
 		// Stickies auto-lock is enabled
-		if ((bool) $this->request->variable('auto_lock_stickies', 0))
+		if ($this->request->variable('auto_lock_stickies', 0))
 		{
 			$auto_lock_flags += FORUM_FLAG_PRUNE_STICKY;
 		}
 
 		// Polls auto-lock is enabled
-		if ((bool) $this->request->variable('auto_lock_polls', 0))
+		if ($this->request->variable('auto_lock_polls', 0))
 		{
 			$auto_lock_flags += FORUM_FLAG_PRUNE_POLL;
 		}
