@@ -1,83 +1,83 @@
-<!-- IF S_FORUM_POST -->
+{% if S_FORUM_POST %}
 <div id="forum_auto_lock_options">
 	<fieldset>
-		<legend>{L_ACP_FORUM_AUTO_LOCK_SETTINGS}</legend>
+		<legend>{{ lang('ACP_FORUM_AUTO_LOCK_SETTINGS') }}</legend>
 		<dl>
 			<dt>
-				<label for="enable_auto_lock">{L_ACP_ENABLE_AUTO_LOCK}</label>
+				<label for="enable_auto_lock">{{ lang('ACP_ENABLE_AUTO_LOCK') }}</label>
 			</dt>
 			<dd>
 				<label>
-					<input type="radio" id="enable_auto_lock" name="enable_auto_lock" value="1"<!-- IF AUTO_LOCK_TOPICS_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}
+					<input type="radio" id="enable_auto_lock" name="enable_auto_lock" value="1"{% if AUTO_LOCK_TOPICS_ENABLED %} checked="checked"{% endif %} /> {{ lang('YES') }}
 				</label>
 				<label>
-					<input type="radio" name="enable_auto_lock" value="0"<!-- IF not AUTO_LOCK_TOPICS_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}
+					<input type="radio" name="enable_auto_lock" value="0"{% if not AUTO_LOCK_TOPICS_ENABLED %} checked="checked"{% endif %} /> {{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
 
 		<dl>
 			<dt>
-				<label for="auto_lock_announcements">{L_ACP_AUTO_LOCK_ANNOUNCEMENTS}{L_COLON}</label>
+				<label for="auto_lock_announcements">{{ lang('ACP_AUTO_LOCK_ANNOUNCEMENTS') }}{{ lang('COLON') }}</label>
 			</dt>
 			<dd>
 				<label>
-					<input type="radio" id="auto_lock_announcements" name="auto_lock_announcements" value="1"<!-- IF AUTO_LOCK_ANNOUNCEMENTS --> checked="checked"<!-- ENDIF --> /> {L_YES}
+					<input type="radio" id="auto_lock_announcements" name="auto_lock_announcements" value="1"{% if AUTO_LOCK_ANNOUNCEMENTS %} checked="checked"{% endif %} /> {{ lang('YES') }}
 				</label>
 				<label>
-					<input type="radio" name="auto_lock_announcements" value="0"<!-- IF not AUTO_LOCK_ANNOUNCEMENTS --> checked="checked"<!-- ENDIF --> /> {L_NO}
+					<input type="radio" name="auto_lock_announcements" value="0"{% if not AUTO_LOCK_ANNOUNCEMENTS %} checked="checked"{% endif %} /> {{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
 
 		<dl>
 			<dt>
-				<label for="auto_lock_stickies">{L_ACP_AUTO_LOCK_STICKIES}{L_COLON}</label>
+				<label for="auto_lock_stickies">{{ lang('ACP_AUTO_LOCK_STICKIES') }}{{ lang('COLON') }}</label>
 			</dt>
 			<dd>
 				<label>
-					<input type="radio" id="auto_lock_stickies" name="auto_lock_stickies" value="1"<!-- IF AUTO_LOCK_STICKIES --> checked="checked"<!-- ENDIF --> /> {L_YES}
+					<input type="radio" id="auto_lock_stickies" name="auto_lock_stickies" value="1"{% if AUTO_LOCK_STICKIES %} checked="checked"{% endif %} /> {{ lang('YES') }}
 				</label>
 				<label>
-					<input type="radio" name="auto_lock_stickies" value="0"<!-- IF not AUTO_LOCK_STICKIES --> checked="checked"<!-- ENDIF --> /> {L_NO}
-				</label>
-			</dd>
-		</dl>
-
-		<dl>
-			<dt>
-				<label for="auto_lock_polls">{L_ACP_AUTO_LOCK_POLLS}{L_COLON}</label>
-				<br /><span>{L_ACP_AUTO_LOCK_POLLS_EXPLAIN}</span>
-			</dt>
-			<dd>
-				<label>
-					<input type="radio" id="auto_lock_polls" name="auto_lock_polls" value="1"<!-- IF AUTO_LOCK_POLLS --> checked="checked"<!-- ENDIF --> /> {L_YES}
-				</label>
-				<label>
-					<input type="radio" name="auto_lock_polls" value="0"<!-- IF not AUTO_LOCK_POLLS --> checked="checked"<!-- ENDIF --> /> {L_NO}
+					<input type="radio" name="auto_lock_stickies" value="0"{% if not AUTO_LOCK_STICKIES %} checked="checked"{% endif %} /> {{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
 
 		<dl>
 			<dt>
-				<label for="auto_lock_days">{L_ACP_AUTO_LOCK_DAYS}{L_COLON}</label>
-				<br /><span>{L_ACP_AUTO_LOCK_DAYS_EXPLAIN}</span>
+				<label for="auto_lock_polls">{{ lang('ACP_AUTO_LOCK_POLLS') }}{{ lang('COLON') }}</label>
+				<br /><span>{{ lang('ACP_AUTO_LOCK_POLLS_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				<input type="number" id="auto_lock_days" name="auto_lock_days" maxlength="4" min="0" max="9999" value="<!-- IF AUTO_LOCK_DAYS -->{AUTO_LOCK_DAYS}<!-- ELSE -->0<!-- ENDIF -->" /> {L_DAYS}
+				<label>
+					<input type="radio" id="auto_lock_polls" name="auto_lock_polls" value="1"{% if AUTO_LOCK_POLLS %} checked="checked"{% endif %} /> {{ lang('YES') }}
+				</label>
+				<label>
+					<input type="radio" name="auto_lock_polls" value="0"{% if not AUTO_LOCK_POLLS %} checked="checked"{% endif %} /> {{ lang('NO') }}
+				</label>
 			</dd>
 		</dl>
 
 		<dl>
 			<dt>
-				<label for="auto_lock_freq">{L_ACP_AUTO_LOCK_FREQ}{L_COLON}</label>
-				<br /><span>{L_ACP_AUTO_LOCK_FREQ_EXPLAIN}</span>
+				<label for="auto_lock_days">{{ lang('ACP_AUTO_LOCK_DAYS') }}{{ lang('COLON') }}</label>
+				<br /><span>{{ lang('ACP_AUTO_LOCK_DAYS_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				<input type="number" id="auto_lock_freq" name="auto_lock_freq" maxlength="4" min="0" max="9999" value="<!-- IF AUTO_LOCK_FREQ -->{AUTO_LOCK_FREQ}<!-- ELSE -->0<!-- ENDIF -->" /> {L_DAYS}
+				<input type="number" id="auto_lock_days" name="auto_lock_days" maxlength="4" min="0" max="9999" value="{% if AUTO_LOCK_DAYS %}{{ AUTO_LOCK_DAYS }}{% else %}0{% endif %}" /> {{ lang('DAYS') }}
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+				<label for="auto_lock_freq">{{ lang('ACP_AUTO_LOCK_FREQ') }}{{ lang('COLON') }}</label>
+				<br /><span>{{ lang('ACP_AUTO_LOCK_FREQ_EXPLAIN') }}</span>
+			</dt>
+			<dd>
+				<input type="number" id="auto_lock_freq" name="auto_lock_freq" maxlength="4" min="0" max="9999" value="{% if AUTO_LOCK_FREQ %}{{ AUTO_LOCK_FREQ }}{% else %}0{% endif %}" /> {{ lang('DAYS') }}
 			</dd>
 		</dl>
 	</fieldset>
 </div>
-<!-- ENDIF -->
+{% endif %}
