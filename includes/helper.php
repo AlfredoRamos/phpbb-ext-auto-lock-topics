@@ -50,7 +50,8 @@ class helper
 		$options['auto_lock_next'] = (int) $options['auto_lock_next'];
 
 		// At least one of the two options must be given
-		if ($options['forum_id'] <= 0 && $options['auto_lock_next'] <= 0) {
+		if ($options['forum_id'] <= 0 && $options['auto_lock_next'] <= 0)
+		{
 			return [];
 		}
 
@@ -180,7 +181,8 @@ class helper
 
 		// Forum ID must exist and next lock
 		// date must be in the future
-		if ($forum_id <= 0 || $next_lock <= time()) {
+		if ($forum_id <= 0 || $next_lock <= time())
+		{
 			return;
 		}
 
