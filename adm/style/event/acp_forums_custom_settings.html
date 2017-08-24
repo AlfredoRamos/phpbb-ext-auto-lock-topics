@@ -65,7 +65,7 @@
 				<br /><span>{{ lang('ACP_AUTO_LOCK_DAYS_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				<input type="number" id="auto_lock_days" name="auto_lock_days" maxlength="4" min="0" max="9999" value="{% if AUTO_LOCK_DAYS %}{{ AUTO_LOCK_DAYS }}{% else %}0{% endif %}" /> {{ lang('DAYS') }}
+				<input type="number" id="auto_lock_days" name="auto_lock_days" min="0" max="9999" value="{% if AUTO_LOCK_DAYS %}{{ AUTO_LOCK_DAYS }}{% else %}0{% endif %}" /> {{ lang('DAYS') }}
 			</dd>
 		</dl>
 
@@ -75,7 +75,7 @@
 				<br /><span>{{ lang('ACP_AUTO_LOCK_FREQ_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				<input type="number" id="auto_lock_freq" name="auto_lock_freq" maxlength="4" min="0" max="9999" value="{% if AUTO_LOCK_FREQ %}{{ AUTO_LOCK_FREQ }}{% else %}0{% endif %}" /> {{ lang('DAYS') }}
+				<input type="number" id="auto_lock_freq" name="auto_lock_freq" min="0" max="9999" value="{% if AUTO_LOCK_FREQ %}{{ AUTO_LOCK_FREQ }}{% else %}0{% endif %}" /> {{ lang('DAYS') }}
 			</dd>
 		</dl>
 	</fieldset>
