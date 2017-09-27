@@ -15,7 +15,9 @@ class m1_auto_lock_topics_schema extends migration
 {
 
 	/**
-	 * Update forums table schema
+	 * Update forums table schema.
+	 *
+	 * @return array
 	 */
 	public function update_schema()
 	{
@@ -33,7 +35,9 @@ class m1_auto_lock_topics_schema extends migration
 	}
 
 	/**
-	 * Rever forums table schema
+	 * Revert forums table schema.
+	 *
+	 * @return array
 	 */
 	public function revert_schema()
 	{
