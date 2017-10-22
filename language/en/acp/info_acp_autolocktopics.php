@@ -29,11 +29,12 @@ $lang = array_merge($lang, [
 	'ACP_AUTO_LOCK_ANNOUNCEMENTS'	=> 'Auto-lock announcements',
 	'ACP_AUTO_LOCK_STICKIES'		=> 'Auto-lock stickies',
 	'ACP_AUTO_LOCK_POLLS'			=> 'Auto-lock polls',
-	'ACP_AUTO_LOCK_POLLS_EXPLAIN'	=> 'Locks topics with polls not voted in fo post age days.',
+	'ACP_AUTO_LOCK_POLLS_EXPLAIN'	=> 'Locks topics with polls not voted in for post age days.',
 	'ACP_AUTO_LOCK_DAYS'			=> 'Auto-lock post age',
 	'ACP_AUTO_LOCK_DAYS_EXPLAIN'	=> 'Number of days since the last post.',
 	'ACP_AUTO_LOCK_FREQ'		=> 'Auto-lock frequency',
 	'ACP_AUTO_LOCK_FREQ_EXPLAIN' => 'Time in days between auto-lock events.',
 
+	// %s => Forum name
 	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Topics auto-locked</strong><br />» %s'
 ]);
