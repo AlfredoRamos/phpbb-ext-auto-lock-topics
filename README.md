@@ -54,3 +54,9 @@ It will run automatically using phpBB's cron functionality.
 - Delete all the files inside `{PHPBB_ROOT}/alfredoramos/autolocktopics/`
 - Download the new version
 - Install the extension
+
+### Contributors
+
+Thanks to the following people for contributing to the extension:
+
+- [alhitary](https://github.com/alhitary) - Arabic translation
