@@ -25,11 +25,11 @@ It will run automatically using phpBB's cron functionality.
 
 [![Forums](https://i.imgur.com/aBjwVBpm.png)](https://i.imgur.com/aBjwVBp.png)
 
-[![Forum settings](https://i.imgur.com/OjCc15nm.png)](https://i.imgur.com/OjCc15n.png)
+[![Forum settings](https://i.imgur.com/mBCEbSfm.png)](https://i.imgur.com/mBCEbSf.png)
 
-[![Topics loked](https://i.imgur.com/qSPIC67m.png)](https://i.imgur.com/qSPIC67.png)
+[![Topics loked](https://i.imgur.com/uM7dkoGm.png)](https://i.imgur.com/uM7dkoG.png)
 
-[![Admin log](https://i.imgur.com/qPtS19im.png)](https://i.imgur.com/qPtS19i.png)
+[![Admin log](https://i.imgur.com/PIOhYf7m.png)](https://i.imgur.com/PIOhYf7.png)
 
 *(Click to view in full size)*
 
