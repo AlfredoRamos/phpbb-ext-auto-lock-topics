@@ -75,8 +75,8 @@ class listener implements EventSubscriberInterface
 		$event['forum_data'] = array_merge([
 			'enable_auto_lock' => $this->request->variable('enable_auto_lock', 0),
 			'auto_lock_flags' => $auto_lock_flags,
-			'auto_lock_days' => $this->request->variable('auto_lock_days', 0),
-			'auto_lock_freq' => $this->request->variable('auto_lock_freq', 0)
+			'auto_lock_days' => $this->request->variable('auto_lock_days', 90),
+			'auto_lock_freq' => $this->request->variable('auto_lock_freq', 7)
 		], $event['forum_data']);
 	}
 
