@@ -32,14 +32,26 @@ class auto_lock_test extends phpbb_functional_test_case
 		));
 		$form = $crawler->selectButton('Submit')->form();
 
-		$this->assertEquals(1, $crawler->filter(
+		$this->assertSame(1, $crawler->filter(
 			'#forumedit #forum_auto_lock_options'
 		)->count());
-		$this->assertEquals(0, $form->get('enable_auto_lock')->getValue());
-		$this->assertEquals(0, $form->get('auto_lock_announcements')->getValue());
-		$this->assertEquals(0, $form->get('auto_lock_stickies')->getValue());
-		$this->assertEquals(0, $form->get('auto_lock_polls')->getValue());
-		$this->assertEquals(90, $form->get('auto_lock_days')->getValue());
-		$this->assertEquals(7, $form->get('auto_lock_freq')->getValue());
+
+		$this->assertTrue($form->has('enable_auto_lock'));
+		$this->assertSame(0, (int) $form->get('enable_auto_lock')->getValue());
+
+		$this->assertTrue($form->has('auto_lock_announcements'));
+		$this->assertSame(0, (int) $form->get('auto_lock_announcements')->getValue());
+
+		$this->assertTrue($form->has('auto_lock_stickies'));
+		$this->assertSame(0, (int) $form->get('auto_lock_stickies')->getValue());
+
+		$this->assertTrue($form->has('auto_lock_polls'));
+		$this->assertSame(0, (int) $form->get('auto_lock_polls')->getValue());
+
+		$this->assertTrue($form->has('auto_lock_days'));
+		$this->assertSame(90, (int) $form->get('auto_lock_days')->getValue());
+
+		$this->assertTrue($form->has('auto_lock_freq'));
+		$this->assertSame(7, (int) $form->get('auto_lock_freq')->getValue());
 	}
 }
