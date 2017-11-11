@@ -23,13 +23,7 @@ It will run automatically using phpBB's cron functionality.
 
 ### Preview
 
-[![Forums](https://i.imgur.com/aBjwVBpm.png)](https://i.imgur.com/aBjwVBp.png)
-
-[![Forum settings](https://i.imgur.com/mBCEbSfm.png)](https://i.imgur.com/mBCEbSf.png)
-
-[![Topics loked](https://i.imgur.com/uM7dkoGm.png)](https://i.imgur.com/uM7dkoG.png)
-
-[![Admin log](https://i.imgur.com/PIOhYf7m.png)](https://i.imgur.com/PIOhYf7.png)
+[![Forums](https://i.imgur.com/aBjwVBpt.png)](https://i.imgur.com/aBjwVBp.png) [![Forum settings](https://i.imgur.com/mBCEbSft.png)](https://i.imgur.com/mBCEbSf.png) [![Topics loked](https://i.imgur.com/uM7dkoGt.png)](https://i.imgur.com/uM7dkoG.png) [![Admin log](https://i.imgur.com/PIOhYf7t.png)](https://i.imgur.com/PIOhYf7.png)
 
 *(Click to view in full size)*
 
