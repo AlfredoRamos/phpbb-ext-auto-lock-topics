@@ -73,8 +73,8 @@ class helper
 
 		$result = $this->db->sql_query($sql);
 
-		// Check if the just one row was requested,
-		// otherwise return an array of forums
+		// Check if just one row was requested, otherwise
+		// return an array of forums
 		if ($options['forum_id'] > 0)
 		{
 			$forum_data = $this->db->sql_fetchrow($result);
@@ -112,52 +112,47 @@ class helper
 			return false;
 		}
 
-		// New topic data
-		$data = ['topic_status'	=> ITEM_LOCKED];
-
-		// It will contain the topic types (announcement or sticky)
-		// unless those options have been enabled
+		// Topic types to ignore in the SQL query
 		$type = [];
 
-		// Check if announcements auto-lock is enabled
-		if (!(bool) ($flags & FORUM_FLAG_PRUNE_ANNOUNCE))
+		// Check if announcements auto-lock is disabled
+		if (!($flags & FORUM_FLAG_PRUNE_ANNOUNCE))
 		{
 			$type[] = POST_ANNOUNCE;
 			$type[] = POST_GLOBAL;
 		}
 
-		// Check if stickies auto-lock is enabled
-		if (!(bool) ($flags & FORUM_FLAG_PRUNE_STICKY))
+		// Check if stickies auto-lock is disabled
+		if (!($flags & FORUM_FLAG_PRUNE_STICKY))
 		{
 			$type[] = POST_STICKY;
 		}
 
+		// Lock topics
 		$sql = 'UPDATE ' . TOPICS_TABLE . '
-			SET ' . $this->db->sql_build_array('UPDATE', $data) . '
-			WHERE ' . $this->db->sql_in_set('forum_id', [$forum_id]) . '
+			SET ' . $this->db->sql_build_array('UPDATE', ['topic_status' => ITEM_LOCKED]) . '
+			WHERE forum_id = ' . $forum_id . '
 			AND topic_status = ' . ITEM_UNLOCKED;
 
-		// If announcements or stickies auto-lock were disabled
-		// ignore them in the SQL query
+		// Check if is announcements or stickies auto-lock is disabled
 		if (!empty($type))
 		{
 			$sql .= ' AND ' . $this->db->sql_in_set('topic_type', $type, true);
 		}
 
-		// Start
-		// Wrap the condition to check
-		// whether is a poll or a normal post
+		// Wrap:start
+		// Check if is a normal topic
 		$sql .= ' AND ((poll_start = 0
 			AND topic_last_post_time < ' . $lock_date . ')';
 
-		// Check if polls auto-lock is enabled
-		if ((bool) ($flags & FORUM_FLAG_PRUNE_POLL))
+		// Check if is a poll and polls auto-lock is enabled
+		if ($flags & FORUM_FLAG_PRUNE_POLL)
 		{
 			$sql .= ' OR (poll_start > 0
 				AND poll_last_vote < ' . $lock_date . ')';
 		}
-		// End
-		// Wrap ends here
+
+		// Wrap:end
 		$sql .= ')';
 
 		$this->db->sql_query($sql);
@@ -179,18 +174,15 @@ class helper
 		$forum_id = (int) $forum_id;
 		$next_lock = (int) $next_lock;
 
-		// Forum ID must exist and next lock
-		// date must be in the future
+		// Forum ID must exist and next lock date
+		// must be in the future
 		if ($forum_id <= 0 || $next_lock <= time())
 		{
 			return;
 		}
 
-		// New forum data
-		$data = ['auto_lock_next' => $next_lock];
-
 		$sql = 'UPDATE ' . FORUMS_TABLE . '
-			SET ' . $this->db->sql_build_array('UPDATE', $data) . '
+			SET ' . $this->db->sql_build_array('UPDATE', ['auto_lock_next' => $next_lock]) . '
 			WHERE forum_id = ' . $forum_id;
 
 		$this->db->sql_query($sql);
