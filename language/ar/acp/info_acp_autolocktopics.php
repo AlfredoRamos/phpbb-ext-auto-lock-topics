@@ -24,7 +24,7 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-	'ACP_FORUM_AUTO_LOCK_SETTINGS'	=> 'إعدادات الإغلاق التلقائي ',
+	'ACP_FORUM_AUTO_LOCK_SETTINGS'	=> 'إعدادات الإغلاق التلقائي للمواضيع',
 	'ACP_ENABLE_AUTO_LOCK'			=> 'تفعيل ',
 	'ACP_AUTO_LOCK_ANNOUNCEMENTS'	=> 'الإعلانات ',
 	'ACP_AUTO_LOCK_STICKIES'		=> 'المواضيع المُثبتة ',
