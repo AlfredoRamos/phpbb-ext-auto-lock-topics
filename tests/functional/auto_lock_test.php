@@ -30,7 +30,7 @@ class auto_lock_test extends phpbb_functional_test_case
 			'adm/index.php?i=acp_forums&f=2&mode=manage&action=edit&sid=%s',
 			$this->sid
 		));
-		$form = $crawler->selectButton('Submit')->form();
+		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 
 		$this->assertSame(1, $crawler->filter(
 			'#forumedit #forum_auto_lock_options'
