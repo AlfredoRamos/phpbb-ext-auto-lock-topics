@@ -43,6 +43,16 @@ class auto_lock_topics extends task_base
 	}
 
 	/**
+	 * Check if the cron task can be executed.
+	 *
+	 * @return bool
+	 */
+	public function is_runnable()
+	{
+		return true;
+	}
+
+	/**
 	 * Execute the cron task.
 	 *
 	 * @return void
@@ -54,8 +64,8 @@ class auto_lock_topics extends task_base
 			'auto_lock_next' => time()
 		]);
 
-		// It there's no forums that need to
-		// lock its topics, stop execution
+		// It there's no forums that need to lock
+		// its topics, stop execution
 		if (empty($forums))
 		{
 			return;
@@ -96,16 +106,6 @@ class auto_lock_topics extends task_base
 				);
 			}
 		}
-	}
-
-	/**
-	 * Check if the cron task can be executed.
-	 *
-	 * @return bool
-	 */
-	public function is_runnable()
-	{
-		return true;
 	}
 
 }
