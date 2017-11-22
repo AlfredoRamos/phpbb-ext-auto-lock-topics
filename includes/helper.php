@@ -14,13 +14,13 @@ use phpbb\db\driver\factory as database;
 class helper
 {
 
-	/** @var \phpbb\db\driver\factory $db */
+	/** @var \phpbb\db\driver\factory */
 	protected $db;
 
 	/**
 	 * Constructor of the helper class.
 	 *
-	 * @param \phpbb\db\driver\factory	$db
+	 * @param \phpbb\db\driver\factory $db
 	 *
 	 * @return void
 	 */
@@ -33,7 +33,7 @@ class helper
 	/**
 	 * Forum data used in the cron task.
 	 *
-	 * @param array	$options
+	 * @param array $options
 	 *
 	 * @return array
 	 */
@@ -93,9 +93,9 @@ class helper
 	/**
 	 * Lock all topics by forum ID.
 	 *
-	 * @param integer	$forum_id
-	 * @param integer	$flags
-	 * @param integer	$lock_date
+	 * @param integer $forum_id
+	 * @param integer $flags
+	 * @param integer $lock_date
 	 *
 	 * @return bool
 	 */
@@ -163,8 +163,8 @@ class helper
 	/**
 	 * Update the next lock date in the forum table.
 	 *
-	 * @param integer	$forum_id
-	 * @param integer	$next_lock
+	 * @param integer $forum_id
+	 * @param integer $next_lock
 	 *
 	 * @return void
 	 */

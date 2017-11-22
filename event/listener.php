@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class listener implements EventSubscriberInterface
 {
 
-	/** @var \phpbb\request\request $request */
+	/** @var \phpbb\request\request */
 	protected $request;
 
 	/**
@@ -45,6 +45,8 @@ class listener implements EventSubscriberInterface
 
 	/**
 	 * Request and update forum data.
+	 *
+	 * @param object $event
 	 *
 	 * @return void
 	 */
@@ -82,6 +84,8 @@ class listener implements EventSubscriberInterface
 
 	/**
 	 * Assign and update template variables.
+	 *
+	 * @param object $event
 	 *
 	 * @return void
 	 */

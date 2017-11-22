@@ -17,13 +17,13 @@ use phpbb\log\log;
 class auto_lock_topics extends task_base
 {
 
-	/** @var \alfredoramos\autolocktopics\includes\helper $helper */
+	/** @var \alfredoramos\autolocktopics\includes\helper */
 	protected $helper;
 
-	/** @var \phpbb\user $user */
+	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var \phpbb\log\log $log */
+	/** @var \phpbb\log\log */
 	protected $log;
 
 	/**
