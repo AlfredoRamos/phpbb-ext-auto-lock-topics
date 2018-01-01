@@ -45,6 +45,6 @@ It will run automatically using phpBB's cron functionality.
 ### Upgrade
 
 - Uninstall the extension
-- Delete all the files inside `{PHPBB_ROOT}/alfredoramos/autolocktopics/`
+- Delete all the files inside `{PHPBB_ROOT}/ext/alfredoramos/autolocktopics/`
 - Download the new version
 - Install the extension
