@@ -64,8 +64,7 @@ class auto_lock_topics extends task_base
 			'auto_lock_next' => time()
 		]);
 
-		// It there's no forums that need to lock
-		// its topics, stop execution
+		// Stop execution if there's no forums to lock
 		if (empty($forums))
 		{
 			return;
