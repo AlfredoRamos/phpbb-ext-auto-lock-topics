@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Auto-lock Topics Extension for phpBB 3.2.x",
 	"homepage": "https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics",
-	"version": "1.0.2",
-	"time": "2017-10-31",
+	"version": "1.0.3",
+	"time": "20178-02-04",
 	"keywords": ["phpbb", "extension", "auto-lock", "topics", "cron"],
 	"license": "GPL-2.0",
 	"authors": [
