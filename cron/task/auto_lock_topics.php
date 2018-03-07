@@ -43,16 +43,6 @@ class auto_lock_topics extends task_base
 	}
 
 	/**
-	 * Check if the cron task can be executed.
-	 *
-	 * @return bool
-	 */
-	public function is_runnable()
-	{
-		return true;
-	}
-
-	/**
 	 * Execute the cron task.
 	 *
 	 * @return void
