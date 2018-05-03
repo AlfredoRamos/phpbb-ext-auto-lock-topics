@@ -54,12 +54,14 @@ class helper
 		// Merge default options with given options
 		$options = array_merge([
 			'forum_id'			=> 0,
-			'auto_lock_next'	=> time()
+			'auto_lock_next'	=> time(),
+			'limit'				=> 0
 		], $options);
 
 		// Cast option values
 		$options['forum_id'] = (int) $options['forum_id'];
 		$options['auto_lock_next'] = (int) $options['auto_lock_next'];
+		$options['limit'] = (int) $options['limit'];
 
 		// At least one of the two options must be given
 		if ($options['forum_id'] <= 0 && $options['auto_lock_next'] <= 0)
@@ -83,21 +85,22 @@ class helper
 			$sql .= ' AND auto_lock_next < ' . $options['auto_lock_next'];
 		}
 
-		$result = $this->db->sql_query($sql);
-		$forum_data = $this->db->sql_fetchrowset($result);
+		$result = $this->db->sql_query_limit($sql, $options['limit']);
+		$forum = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
 
-		return $forum_data;
+		return $forum;
 	}
 
 	/**
 	 * Auto-lock topics given forum data.
 	 *
-	 * @param array $forum
+	 * @param array		$forum
+	 * @param integer	$limit
 	 *
 	 * @return void
 	 */
-	public function auto_lock($forum = [])
+	public function auto_lock($forum = [], $limit = 0)
 	{
 		if (empty($forum))
 		{
@@ -109,6 +112,7 @@ class helper
 		$forum['auto_lock_flags'] = (int) $forum['auto_lock_flags'];
 		$forum['auto_lock_days'] = (int) $forum['auto_lock_days'];
 		$forum['auto_lock_freq'] = (int) $forum['auto_lock_freq'];
+		$limit = (int) $limit;
 
 		// Seconds in a day
 		$day = 24 * 60 * 60;
@@ -117,7 +121,8 @@ class helper
 		$locked = $this->lock_topics(
 			$forum['forum_id'],
 			$forum['auto_lock_flags'],
-			(time() - ($forum['auto_lock_days'] * $day))
+			(time() - ($forum['auto_lock_days'] * $day)),
+			$limit
 		);
 
 		// Update the next lock date
@@ -146,15 +151,17 @@ class helper
 	 * @param integer $forum_id
 	 * @param integer $flags
 	 * @param integer $lock_date
+	 * @param integer $limit
 	 *
 	 * @return bool
 	 */
-	protected function lock_topics($forum_id = 0, $flags = 0, $lock_date = 0)
+	protected function lock_topics($forum_id = 0, $flags = 0, $lock_date = 0, $limit = 0)
 	{
 		// Cast parameters
 		$forum_id = (int) $forum_id;
 		$flags = (int) $flags;
 		$lock_date = (int) $lock_date;
+		$limit = (int) $limit;
 
 		// Invalid forum ID
 		if ($forum_id <= 0)
@@ -178,34 +185,55 @@ class helper
 			$type[] = POST_STICKY;
 		}
 
-		// Lock topics
-		$sql = 'UPDATE ' . TOPICS_TABLE . '
-			SET ' . $this->db->sql_build_array('UPDATE', ['topic_status' => ITEM_LOCKED]) . '
-			WHERE forum_id = ' . $forum_id . '
+		// SQL condition
+		$sql_where = 'forum_id = ' . $forum_id . '
 			AND topic_status = ' . ITEM_UNLOCKED;
 
 		// Check if is announcements or stickies auto-lock is disabled
 		if (!empty($type))
 		{
-			$sql .= ' AND ' . $this->db->sql_in_set('topic_type', $type, true);
+			$sql_where .= ' AND ' . $this->db->sql_in_set('topic_type', $type, true);
 		}
 
 		// Wrap:start
 		// Check if is a normal topic
-		$sql .= ' AND ((poll_start = 0
+		$sql_where .= ' AND ((poll_start = 0
 			AND topic_last_post_time < ' . $lock_date . ')';
 
 		// Check if is a poll and polls auto-lock is enabled
 		if ($flags & FORUM_FLAG_PRUNE_POLL)
 		{
-			$sql .= ' OR (poll_start > 0
+			$sql_where .= ' OR (poll_start > 0
 				AND poll_last_vote < ' . $lock_date . ')';
 		}
 
 		// Wrap:end
-		$sql .= ')';
+		$sql_where .= ')';
 
-		$this->db->sql_query($sql);
+		// Cache SELECT query for 12 hours
+		$cache_time = 12 * 60 * 60;
+
+		// Get topic list
+		$sql_select = 'SELECT topic_id
+			FROM ' . TOPICS_TABLE . '
+			WHERE ' . $sql_where;
+		$result = $this->db->sql_query_limit($sql_select, $limit, 0, $cache_time);
+		$topics = $this->db->sql_fetchrowset($result);
+		$this->db->sql_freeresult($result);
+		$topic_ids = [];
+
+		// Get topic ID list
+		foreach ($topics as $topic)
+		{
+			$topic_ids[] = (int) $topic['topic_id'];
+		}
+
+		// Lock topics
+		$sql_update = 'UPDATE ' . TOPICS_TABLE . '
+			SET ' . $this->db->sql_build_array('UPDATE', ['topic_status' => ITEM_LOCKED]) . '
+			WHERE ' . $sql_where . '
+			AND ' . $this->db->sql_in_set('topic_id', $topic_ids);
+		$this->db->sql_query($sql_update);
 
 		return ((int) $this->db->sql_affectedrows() > 0);
 	}
