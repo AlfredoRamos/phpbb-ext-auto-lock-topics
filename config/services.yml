@@ -13,3 +13,5 @@ services:
         class: alfredoramos\autolocktopics\includes\helper
         arguments:
             - '@dbal.conn'
+            - '@log'
+            - '@user'

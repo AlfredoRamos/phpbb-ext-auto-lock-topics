@@ -10,6 +10,8 @@
 namespace alfredoramos\autolocktopics\includes;
 
 use phpbb\db\driver\factory as database;
+use phpbb\log\log;
+use phpbb\user;
 
 class helper
 {
@@ -17,16 +19,26 @@ class helper
 	/** @var \phpbb\db\driver\factory */
 	protected $db;
 
+	/** @var \phpbb\log\log */
+	protected $log;
+
+	/** @var \phpbb\user */
+	protected $user;
+
 	/**
 	 * Constructor of the helper class.
 	 *
-	 * @param \phpbb\db\driver\factory $db
+	 * @param \phpbb\db\driver\factory	$db
+	 * @param \phpbb\log\log			$log
+	 * @param \phpbb\user				$user
 	 *
 	 * @return void
 	 */
-	public function __construct(database $db)
+	public function __construct(database $db, log $log, user $user)
 	{
 		$this->db = $db;
+		$this->log = $log;
+		$this->user = $user;
 	}
 
 
@@ -42,7 +54,7 @@ class helper
 		// Merge default options with given options
 		$options = array_merge([
 			'forum_id'			=> 0,
-			'auto_lock_next'	=> 0
+			'auto_lock_next'	=> time()
 		], $options);
 
 		// Cast option values
@@ -72,23 +84,61 @@ class helper
 		}
 
 		$result = $this->db->sql_query($sql);
-
-		// Check if just one row was requested, otherwise
-		// return an array of forums
-		if ($options['forum_id'] > 0)
-		{
-			$forum_data = $this->db->sql_fetchrow($result);
-		}
-		else
-		{
-			$forum_data = $this->db->sql_fetchrowset($result);
-		}
-
+		$forum_data = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
 
 		return $forum_data;
 	}
 
+	/**
+	 * Auto-lock topics given forum data.
+	 *
+	 * @param array $forum
+	 *
+	 * @return void
+	 */
+	public function auto_lock($forum = [])
+	{
+		if (empty($forum))
+		{
+			return;
+		}
+
+		// Cast values
+		$forum['forum_id'] = (int) $forum['forum_id'];
+		$forum['auto_lock_flags'] = (int) $forum['auto_lock_flags'];
+		$forum['auto_lock_days'] = (int) $forum['auto_lock_days'];
+		$forum['auto_lock_freq'] = (int) $forum['auto_lock_freq'];
+
+		// Seconds in a day
+		$day = 24 * 60 * 60;
+
+		// Lock the topics
+		$locked = $this->lock_topics(
+			$forum['forum_id'],
+			$forum['auto_lock_flags'],
+			(time() - ($forum['auto_lock_days'] * $day))
+		);
+
+		// Update the next lock date
+		$this->update_next_lock_date(
+			$forum['forum_id'],
+			(time() + ($forum['auto_lock_freq'] * $day))
+		);
+
+		if ($locked)
+		{
+			// Add an entry in the admin log
+			$this->log->add(
+				'admin',
+				$this->user->data['user_id'],
+				$this->user->ip,
+				'LOG_AUTO_LOCK_TOPIC',
+				false,
+				[$forum['forum_name']]
+			);
+		}
+	}
 
 	/**
 	 * Lock all topics by forum ID.
@@ -99,7 +149,7 @@ class helper
 	 *
 	 * @return bool
 	 */
-	public function lock_topics($forum_id = 0, $flags = 0, $lock_date = 0)
+	protected function lock_topics($forum_id = 0, $flags = 0, $lock_date = 0)
 	{
 		// Cast parameters
 		$forum_id = (int) $forum_id;
@@ -168,7 +218,7 @@ class helper
 	 *
 	 * @return void
 	 */
-	public function update_next_lock_date($forum_id = 0, $next_lock = 0)
+	protected function update_next_lock_date($forum_id = 0, $next_lock = 0)
 	{
 		// Cast parameters
 		$forum_id = (int) $forum_id;
