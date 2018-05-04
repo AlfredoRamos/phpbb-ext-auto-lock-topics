@@ -12,6 +12,7 @@ namespace alfredoramos\autolocktopics\includes;
 use phpbb\db\driver\factory as database;
 use phpbb\log\log;
 use phpbb\user;
+use phpbb\event\dispatcher_interface as dispatcher;
 
 class helper
 {
@@ -25,20 +26,25 @@ class helper
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \phpbb\event\dispatcher_interface */
+	protected $dispatcher;
+
 	/**
 	 * Constructor of the helper class.
 	 *
-	 * @param \phpbb\db\driver\factory	$db
-	 * @param \phpbb\log\log			$log
-	 * @param \phpbb\user				$user
+	 * @param \phpbb\db\driver\factory			$db
+	 * @param \phpbb\log\log					$log
+	 * @param \phpbb\user						$user
+	 * @param \phpbb\event\dispatcher_interface	$dispatcher
 	 *
 	 * @return void
 	 */
-	public function __construct(database $db, log $log, user $user)
+	public function __construct(database $db, log $log, user $user, dispatcher $dispatcher)
 	{
 		$this->db = $db;
 		$this->log = $log;
 		$this->user = $user;
+		$this->dispatcher = $dispatcher;
 	}
 
 
@@ -234,6 +240,22 @@ class helper
 			WHERE ' . $sql_where . '
 			AND ' . $this->db->sql_in_set('topic_id', $topic_ids);
 		$this->db->sql_query($sql_update);
+
+		/**
+		 * Manipulate topics after they have been locked.
+		 *
+		 * @event alfredoramos.autolocktopics.topics_locked_after
+		 *
+		 * @var integer	forum_id	The forum ID where the topics belong to.
+		 * @var array	topic_ids	List of topic IDs that were auto-locked.
+		 *
+		 * @since 1.1.0
+		 */
+		$vars = array(
+			'forum_id',
+			'topic_ids',
+		);
+		extract($this->dispatcher->trigger_event('alfredoramos.autolocktopics.topics_locked_after', compact($vars)));
 
 		return ((int) $this->db->sql_affectedrows() > 0);
 	}

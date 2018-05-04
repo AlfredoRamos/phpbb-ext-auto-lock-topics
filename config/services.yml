@@ -15,3 +15,4 @@ services:
             - '@dbal.conn'
             - '@log'
             - '@user'
+            - '@dispatcher'
