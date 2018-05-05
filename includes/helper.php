@@ -251,10 +251,7 @@ class helper
 		 *
 		 * @since 1.1.0
 		 */
-		$vars = array(
-			'forum_id',
-			'topic_ids',
-		);
+		$vars = ['forum_id', 'topic_ids'];
 		extract($this->dispatcher->trigger_event('alfredoramos.autolocktopics.topics_locked_after', compact($vars)));
 
 		return ((int) $this->db->sql_affectedrows() > 0);
