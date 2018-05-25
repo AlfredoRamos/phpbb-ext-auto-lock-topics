@@ -176,19 +176,19 @@ class helper
 		}
 
 		// Topic types to ignore in the SQL query
-		$type = [];
+		$ignore = [];
 
 		// Check if announcements auto-lock is disabled
 		if (!($flags & FORUM_FLAG_PRUNE_ANNOUNCE))
 		{
-			$type[] = POST_ANNOUNCE;
-			$type[] = POST_GLOBAL;
+			$ignore[] = POST_ANNOUNCE;
+			$ignore[] = POST_GLOBAL;
 		}
 
 		// Check if stickies auto-lock is disabled
 		if (!($flags & FORUM_FLAG_PRUNE_STICKY))
 		{
-			$type[] = POST_STICKY;
+			$ignore[] = POST_STICKY;
 		}
 
 		// SQL condition
@@ -196,9 +196,9 @@ class helper
 			AND topic_status = ' . ITEM_UNLOCKED;
 
 		// Check if is announcements or stickies auto-lock is disabled
-		if (!empty($type))
+		if (!empty($ignore))
 		{
-			$sql_where .= ' AND ' . $this->db->sql_in_set('topic_type', $type, true);
+			$sql_where .= ' AND ' . $this->db->sql_in_set('topic_type', $ignore, true);
 		}
 
 		// Wrap:start
@@ -232,6 +232,12 @@ class helper
 		foreach ($topics as $topic)
 		{
 			$topic_ids[] = (int) $topic['topic_id'];
+		}
+
+		// There was no topic to lock
+		if (empty($topic_ids))
+		{
+			return false;
 		}
 
 		// Lock topics
