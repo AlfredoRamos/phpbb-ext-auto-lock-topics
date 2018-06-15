@@ -9,25 +9,25 @@
 
 namespace alfredoramos\autolocktopics\event;
 
-use phpbb\request\request;
+use alfredoramos\autolocktopics\includes\helper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
 
-	/** @var \phpbb\request\request */
-	protected $request;
+	/** @var \alfredoramos\autolocktopics\includes\helper */
+	protected $helper;
 
 	/**
 	 * Event listener constructor.
 	 *
-	 * @param \phpbb\request\request $request
+	 * @param \alfredoramos\autolocktopics\includes\helper $helper
 	 *
 	 * @return void
 	 */
-	public function __construct(request $request)
+	public function __construct(helper $helper)
 	{
-		$this->request = $request;
+		$this->helper = $helper;
 	}
 
 	/**
@@ -38,8 +38,9 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return [
-			'core.acp_manage_forums_request_data' => 'manage_forums_request_data',
-			'core.acp_manage_forums_display_form' => 'manage_forums_display_form'
+			'core.acp_manage_forums_request_data'		=> 'manage_forums_request_data',
+			'core.acp_manage_forums_initialise_data'	=> 'manage_forums_initialise_data',
+			'core.acp_manage_forums_display_form'		=> 'manage_forums_display_form'
 		];
 	}
 
@@ -52,34 +53,32 @@ class listener implements EventSubscriberInterface
 	 */
 	public function manage_forums_request_data($event)
 	{
-		// Set auto-lock flags
-		$auto_lock_flags = 0;
+		// Update forum data
+		$event['forum_data'] = array_merge(
+			$this->helper->form_forum_data(),
+			$event['forum_data']
+		);
+	}
 
-		// Announcements auto-lock is enabled
-		if ($this->request->variable('auto_lock_announcements', 0))
+	/**
+	 * Add initial forum data.
+	 *
+	 * @param object $event
+	 *
+	 * @return void
+	 */
+	public function manage_forums_initialise_data($event)
+	{
+		if (!in_array($event['action'], ['add', 'edit']))
 		{
-			$auto_lock_flags += FORUM_FLAG_PRUNE_ANNOUNCE;
-		}
-
-		// Stickies auto-lock is enabled
-		if ($this->request->variable('auto_lock_stickies', 0))
-		{
-			$auto_lock_flags += FORUM_FLAG_PRUNE_STICKY;
-		}
-
-		// Polls auto-lock is enabled
-		if ($this->request->variable('auto_lock_polls', 0))
-		{
-			$auto_lock_flags += FORUM_FLAG_PRUNE_POLL;
+			return;
 		}
 
 		// Update forum data
-		$event['forum_data'] = array_merge([
-			'enable_auto_lock' => $this->request->variable('enable_auto_lock', 0),
-			'auto_lock_flags' => $auto_lock_flags,
-			'auto_lock_days' => $this->request->variable('auto_lock_days', 90),
-			'auto_lock_freq' => $this->request->variable('auto_lock_freq', 7)
-		], $event['forum_data']);
+		$event['forum_data'] = array_merge(
+			$this->helper->form_forum_data(),
+			$event['forum_data']
+		);
 	}
 
 	/**

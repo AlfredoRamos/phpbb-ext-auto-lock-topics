@@ -21,15 +21,20 @@ class auto_lock_test extends phpbb_functional_test_case
 		return ['alfredoramos/autolocktopics'];
 	}
 
-	public function test_acp_form()
+	protected function acp_form_test($uri = '')
 	{
+		if (empty($uri)) {
+			$this->markTestIncomplete('The URI cannot be empty');
+			return;
+		}
+
 		$this->login();
 		$this->admin_login();
 
-		$crawler = self::request('GET', sprintf(
-			'adm/index.php?i=acp_forums&f=2&mode=manage&action=edit&sid=%s',
-			$this->sid
-		));
+		// Append SID
+		$uri = vsprintf('%1$s&sid=%2$s', [$uri, $this->sid]);
+
+		$crawler = self::request('GET', $uri);
 		$form = $crawler->selectButton($this->lang('SUBMIT'))->form();
 
 		$this->assertSame(1, $crawler->filter(
@@ -53,5 +58,19 @@ class auto_lock_test extends phpbb_functional_test_case
 
 		$this->assertTrue($form->has('auto_lock_freq'));
 		$this->assertSame(7, (int) $form->get('auto_lock_freq')->getValue());
+	}
+
+	public function test_acp_edit_forum_form()
+	{
+		$this->acp_form_test(
+			'adm/index.php?i=acp_forums&f=2&mode=manage&action=edit'
+		);
+	}
+
+	public function test_acp_add_forum_form()
+	{
+		$this->acp_form_test(
+			'adm/index.php?i=acp_forums&mode=manage&action=add'
+		);
 	}
 }

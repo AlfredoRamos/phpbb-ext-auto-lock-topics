@@ -11,6 +11,7 @@ namespace alfredoramos\autolocktopics\tests\event;
 
 use phpbb_test_case;
 use alfredoramos\autolocktopics\event\listener;
+use alfredoramos\autolocktopics\includes\helper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -19,21 +20,22 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class listener_test extends phpbb_test_case
 {
 
-	/** @var \phpbb\request\request $request */
-	protected $request;
+	/** @var \alfredoramos\autolocktopics\includes\helper */
+	protected $helper;
 
 	public function setUp()
 	{
 		parent::setUp();
 
-		$this->request = $this->getMock('\phpbb\request\request');
+		$this->helper = $this->getMockBuilder(helper::class)
+			->disableOriginalConstructor()->getMock();
 	}
 
 	public function test_instance()
 	{
 		$this->assertInstanceOf(
 			EventSubscriberInterface::class,
-			new listener($this->request)
+			new listener($this->helper)
 		);
 	}
 
@@ -42,6 +44,7 @@ class listener_test extends phpbb_test_case
 		$this->assertSame(
 			[
 				'core.acp_manage_forums_request_data',
+				'core.acp_manage_forums_initialise_data',
 				'core.acp_manage_forums_display_form'
 			],
 			array_keys(listener::getSubscribedEvents())

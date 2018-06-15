@@ -12,6 +12,7 @@ namespace alfredoramos\autolocktopics\includes;
 use phpbb\db\driver\factory as database;
 use phpbb\log\log;
 use phpbb\user;
+use phpbb\request\request;
 use phpbb\event\dispatcher_interface as dispatcher;
 
 class helper
@@ -26,6 +27,9 @@ class helper
 	/** @var \phpbb\user */
 	protected $user;
 
+	/** @var \phpbb\request\request */
+	protected $request;
+
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $dispatcher;
 
@@ -35,18 +39,19 @@ class helper
 	 * @param \phpbb\db\driver\factory			$db
 	 * @param \phpbb\log\log					$log
 	 * @param \phpbb\user						$user
+	 * @param \phpbb\request\request			$request
 	 * @param \phpbb\event\dispatcher_interface	$dispatcher
 	 *
 	 * @return void
 	 */
-	public function __construct(database $db, log $log, user $user, dispatcher $dispatcher)
+	public function __construct(database $db, log $log, user $user, request $request, dispatcher $dispatcher)
 	{
 		$this->db = $db;
 		$this->log = $log;
 		$this->user = $user;
+		$this->request = $request;
 		$this->dispatcher = $dispatcher;
 	}
-
 
 	/**
 	 * Forum data used in the cron task.
@@ -234,7 +239,7 @@ class helper
 			$topic_ids[] = (int) $topic['topic_id'];
 		}
 
-		// There was no topic to lock
+		// There were no topics to lock
 		if (empty($topic_ids))
 		{
 			return false;
@@ -289,6 +294,42 @@ class helper
 			WHERE forum_id = ' . $forum_id;
 
 		$this->db->sql_query($sql);
+	}
+
+	/**
+	 * Get form forum data.
+	 *
+	 * @return array
+	 */
+	public function form_forum_data()
+	{
+		// Auto-lock flags
+		$auto_lock_flags = 0;
+
+		// Announcements auto-lock is enabled
+		if ($this->request->variable('auto_lock_announcements', 0))
+		{
+			$auto_lock_flags += FORUM_FLAG_PRUNE_ANNOUNCE;
+		}
+
+		// Stickies auto-lock is enabled
+		if ($this->request->variable('auto_lock_stickies', 0))
+		{
+			$auto_lock_flags += FORUM_FLAG_PRUNE_STICKY;
+		}
+
+		// Polls auto-lock is enabled
+		if ($this->request->variable('auto_lock_polls', 0))
+		{
+			$auto_lock_flags += FORUM_FLAG_PRUNE_POLL;
+		}
+
+		return [
+			'enable_auto_lock' => $this->request->variable('enable_auto_lock', 0),
+			'auto_lock_flags' => $auto_lock_flags,
+			'auto_lock_days' => $this->request->variable('auto_lock_days', 90),
+			'auto_lock_freq' => $this->request->variable('auto_lock_freq', 7)
+		];
 	}
 
 }

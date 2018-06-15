@@ -5,7 +5,7 @@ services:
     alfredoramos.autolocktopics.listener:
         class: alfredoramos\autolocktopics\event\listener
         arguments:
-            - '@request'
+            - '@alfredoramos.autolocktopics.helper'
         tags:
             - { name: event.listener }
 
@@ -15,4 +15,5 @@ services:
             - '@dbal.conn'
             - '@log'
             - '@user'
+            - '@request'
             - '@dispatcher'
