@@ -6,8 +6,8 @@ Auto-lock Topics Extension for phpBB 3.2.x
 
 ### Dependencies
 
-- `php` 5.6 or greater
-- `phpBB` 3.2 or greater
+- PHP 5.6 or greater
+- phpBB 3.2 or greater
 
 ### Installation
 
