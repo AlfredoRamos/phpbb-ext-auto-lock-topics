@@ -2,7 +2,7 @@
 
 Auto-lock Topics Extension for phpBB 3.2.x
 
-[![Build Status](https://img.shields.io/travis/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?style=flat-square&maxAge=3600)](https://travis-ci.org/AlfredoRamos/phpbb-ext-auto-lock-topics) [![Latest Stable Version](https://img.shields.io/github/tag/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?label=stable&style=flat-square&maxAge=3600)](https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics/releases) [![Code Quality](https://img.shields.io/codacy/grade/68d61a08cf0541f595194fbf54ed4bd7.svg?style=flat-square)](https://app.codacy.com/app/AlfredoRamos/phpbb-ext-auto-lock-topics) [![License](https://img.shields.io/github/license/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?style=flat-square)](https://raw.githubusercontent.com/AlfredoRamos/phpbb-ext-auto-lock-topics/master/license.txt)
+[![Build Status](https://img.shields.io/travis/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?style=flat-square)](https://travis-ci.org/AlfredoRamos/phpbb-ext-auto-lock-topics) [![Latest Stable Version](https://img.shields.io/github/tag/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?label=stable&style=flat-square)](https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics/releases) [![Code Quality](https://img.shields.io/codacy/grade/68d61a08cf0541f595194fbf54ed4bd7.svg?style=flat-square)](https://app.codacy.com/app/AlfredoRamos/phpbb-ext-auto-lock-topics) [![License](https://img.shields.io/github/license/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?style=flat-square)](https://raw.githubusercontent.com/AlfredoRamos/phpbb-ext-auto-lock-topics/master/license.txt)
 
 ### Dependencies
 
