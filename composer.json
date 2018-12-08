@@ -1,7 +1,7 @@
 {
 	"name": "alfredoramos/autolocktopics",
 	"type": "phpbb-extension",
-	"description": "Auto-lock Topics Extension for phpBB 3.2.x",
+	"description": "Auto-lock Topics extension for phpBB",
 	"homepage": "https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics",
 	"version": "1.1.2",
 	"time": "2018-06-15",
