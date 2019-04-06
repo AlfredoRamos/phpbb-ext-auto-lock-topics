@@ -14,7 +14,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
-
 	/** @var \alfredoramos\autolocktopics\includes\helper */
 	protected $helper;
 
@@ -106,5 +105,4 @@ class listener implements EventSubscriberInterface
 			'AUTO_LOCK_FREQ' => (int) $event['forum_data']['auto_lock_freq']
 		], $event['template_data']);
 	}
-
 }

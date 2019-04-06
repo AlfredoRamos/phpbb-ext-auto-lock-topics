@@ -17,7 +17,6 @@ use phpbb\event\dispatcher_interface as dispatcher;
 
 class helper
 {
-
 	/** @var \phpbb\db\driver\factory */
 	protected $db;
 
@@ -331,5 +330,4 @@ class helper
 			'auto_lock_freq' => $this->request->variable('auto_lock_freq', 7)
 		];
 	}
-
 }

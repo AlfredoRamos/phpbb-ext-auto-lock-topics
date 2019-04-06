@@ -13,7 +13,6 @@ use phpbb\db\migration\migration;
 
 class m1_auto_lock_topics_schema extends migration
 {
-
 	/**
 	 * Update forums table schema.
 	 *
@@ -53,5 +52,4 @@ class m1_auto_lock_topics_schema extends migration
 			]
 		];
 	}
-
 }

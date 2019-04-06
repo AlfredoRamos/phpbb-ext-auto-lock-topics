@@ -14,7 +14,6 @@ use phpbb\cron\task\base as task_base;
 
 class auto_lock_topics extends task_base
 {
-
 	/** @var \alfredoramos\autolocktopics\includes\helper */
 	protected $helper;
 
@@ -52,5 +51,4 @@ class auto_lock_topics extends task_base
 			$this->helper->auto_lock($forum, 300);
 		}
 	}
-
 }
