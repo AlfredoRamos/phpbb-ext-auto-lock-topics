@@ -22,7 +22,7 @@ class listener_test extends phpbb_test_case
 	/** @var \alfredoramos\autolocktopics\includes\helper */
 	protected $helper;
 
-	public function setUp()
+	public function setUp(): void
 	{
 		parent::setUp();
 
