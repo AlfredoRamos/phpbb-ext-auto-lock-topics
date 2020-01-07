@@ -17,3 +17,5 @@ services:
             - '@user'
             - '@request'
             - '@dispatcher'
+            - '%tables.forums%'
+            - '%tables.topics%'

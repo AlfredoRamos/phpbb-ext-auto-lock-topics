@@ -32,6 +32,9 @@ class helper
 	/** @var \phpbb\event\dispatcher_interface */
 	protected $dispatcher;
 
+	/** @var array */
+	protected $tables;
+
 	/**
 	 * Constructor of the helper class.
 	 *
@@ -40,16 +43,27 @@ class helper
 	 * @param \phpbb\user						$user
 	 * @param \phpbb\request\request			$request
 	 * @param \phpbb\event\dispatcher_interface	$dispatcher
+	 * @param string							$forums_table
+	 * @param string							$topics_table
 	 *
 	 * @return void
 	 */
-	public function __construct(database $db, log $log, user $user, request $request, dispatcher $dispatcher)
+	public function __construct(database $db, log $log, user $user, request $request, dispatcher $dispatcher, $forums_table, $topics_table)
 	{
 		$this->db = $db;
 		$this->log = $log;
 		$this->user = $user;
 		$this->request = $request;
 		$this->dispatcher = $dispatcher;
+
+		// Assign tables
+		if (empty($this->tables))
+		{
+			$this->tables = [
+				'forums' => $forums_table,
+				'topics' => $topics_table
+			];
+		}
 	}
 
 	/**
@@ -80,7 +94,7 @@ class helper
 		}
 
 		$sql = 'SELECT forum_id, forum_name, enable_auto_lock, auto_lock_flags, auto_lock_next, auto_lock_days, auto_lock_freq
-			FROM ' . FORUMS_TABLE . '
+			FROM ' . $this->tables['forums'] . '
 			WHERE enable_auto_lock = 1';
 
 		// Get a specific row
@@ -225,7 +239,7 @@ class helper
 
 		// Get topic list
 		$sql_select = 'SELECT topic_id
-			FROM ' . TOPICS_TABLE . '
+			FROM ' . $this->tables['topics'] . '
 			WHERE ' . $sql_where;
 		$result = $this->db->sql_query_limit($sql_select, $limit, 0, $cache_time);
 		$topics = $this->db->sql_fetchrowset($result);
@@ -245,7 +259,7 @@ class helper
 		}
 
 		// Lock topics
-		$sql_update = 'UPDATE ' . TOPICS_TABLE . '
+		$sql_update = 'UPDATE ' . $this->tables['topics'] . '
 			SET ' . $this->db->sql_build_array('UPDATE', ['topic_status' => ITEM_LOCKED]) . '
 			WHERE ' . $sql_where . '
 			AND ' . $this->db->sql_in_set('topic_id', $topic_ids);
@@ -288,7 +302,7 @@ class helper
 			return;
 		}
 
-		$sql = 'UPDATE ' . FORUMS_TABLE . '
+		$sql = 'UPDATE ' . $this->tables['forums'] . '
 			SET ' . $this->db->sql_build_array('UPDATE', ['auto_lock_next' => $next_lock]) . '
 			WHERE forum_id = ' . $forum_id;
 
