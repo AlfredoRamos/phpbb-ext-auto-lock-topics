@@ -24,17 +24,17 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-	'ACP_FORUM_AUTO_LOCK_SETTINGS'	=> 'Auto-lock settings',
-	'ACP_ENABLE_AUTO_LOCK'			=> 'Enable auto-lock',
-	'ACP_AUTO_LOCK_ANNOUNCEMENTS'	=> 'Auto-lock announcements',
-	'ACP_AUTO_LOCK_STICKIES'		=> 'Auto-lock stickies',
-	'ACP_AUTO_LOCK_POLLS'			=> 'Auto-lock polls',
-	'ACP_AUTO_LOCK_POLLS_EXPLAIN'	=> 'Locks topics with polls not voted in for post age days.',
-	'ACP_AUTO_LOCK_DAYS'			=> 'Auto-lock post age',
-	'ACP_AUTO_LOCK_DAYS_EXPLAIN'	=> 'Number of days since the last post.',
-	'ACP_AUTO_LOCK_FREQ'		=> 'Auto-lock frequency',
-	'ACP_AUTO_LOCK_FREQ_EXPLAIN' => 'Time in days between auto-lock events.',
+	'ACP_FORUM_AUTO_LOCK_SETTINGS'	=> 'Configurações Auto-trancar',
+	'ACP_ENABLE_AUTO_LOCK'			=> 'Ativar auto-trancar',
+	'ACP_AUTO_LOCK_ANNOUNCEMENTS'	=> 'Auto-trancar anúncio',
+	'ACP_AUTO_LOCK_STICKIES'		=> 'Auto-trancar fixos',
+	'ACP_AUTO_LOCK_POLLS'			=> 'Auto-trancar enquetes',
+	'ACP_AUTO_LOCK_POLLS_EXPLAIN'	=> 'Trancar tópicos com enquetes não votadas baseadas na idade do post em dias.',
+	'ACP_AUTO_LOCK_DAYS'			=> 'Auto-trancar post por idade',
+	'ACP_AUTO_LOCK_DAYS_EXPLAIN'	=> 'Número de dias desde o último post.',
+	'ACP_AUTO_LOCK_FREQ'		=> 'Freqüência do Auto-trancar',
+	'ACP_AUTO_LOCK_FREQ_EXPLAIN' => 'Tempo em dias entre os eventos do Auto-trancar.',
 
 	// %s => Forum name
-	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Topics auto-locked</strong><br />» %s'
+	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Tópicos auto-trancados</strong><br />» %s'
 ]);
