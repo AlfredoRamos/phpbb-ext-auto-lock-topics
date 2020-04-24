@@ -36,5 +36,5 @@ $lang = array_merge($lang, [
 	'ACP_AUTO_LOCK_FREQ_EXPLAIN' => 'Permet de saisir l’intervalle de temps en nombre en jours entre lesquels un verrouillage automatique s’efectuera.',
 
 	// %s => Forum name
-	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Topics auto-locked</strong><br>» %s'
+	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Verrouillage automatique des sujets</strong><br>» %s'
 ]);
