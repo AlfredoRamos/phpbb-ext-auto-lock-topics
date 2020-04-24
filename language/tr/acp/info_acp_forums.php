@@ -36,5 +36,5 @@ $lang = array_merge($lang, [
 	'ACP_AUTO_LOCK_FREQ_EXPLAIN' => 'Oto-kilit olayları arasındaki gün sayısı.',
 
 	// %s => Forum name
-	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Konu oto-kilitlendi</strong><br />» %s'
+	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Topics auto-locked</strong><br>» %s'
 ]);
