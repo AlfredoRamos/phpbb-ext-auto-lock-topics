@@ -5,6 +5,7 @@ Auto-lock Topics extension for phpBB
 [![Build Status](https://img.shields.io/travis/com/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?style=flat-square)](https://travis-ci.com/AlfredoRamos/phpbb-ext-auto-lock-topics)
 [![Latest Stable Version](https://img.shields.io/github/tag/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?label=stable&style=flat-square)](https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics/releases)
 [![Code Quality](https://img.shields.io/codefactor/grade/github/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?style=flat-square)](https://www.codefactor.io/repository/github/alfredoramos/phpbb-ext-auto-lock-topics)
+[![Translation Progress](https://badges.crowdin.net/phpbb-ext-auto-lock-topics/localized.svg)](https://crowdin.com/project/phpbb-ext-auto-lock-topics)
 [![License](https://img.shields.io/github/license/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?style=flat-square)](https://raw.githubusercontent.com/AlfredoRamos/phpbb-ext-auto-lock-topics/master/license.txt)
 
 ### Dependencies
