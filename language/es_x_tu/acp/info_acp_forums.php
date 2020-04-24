@@ -36,5 +36,5 @@ $lang = array_merge($lang, [
 	'ACP_AUTO_LOCK_FREQ_EXPLAIN' => 'Tiempo en días transcurrido entre los cierres automáticos de temas.',
 
 	// %s => Forum name
-	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Temas cerrados automáticamente</strong><br />» %s'
+	'LOG_AUTO_LOCK_TOPIC'	=> '<strong>Temas cerrados automáticamente</strong><br>» %s'
 ]);

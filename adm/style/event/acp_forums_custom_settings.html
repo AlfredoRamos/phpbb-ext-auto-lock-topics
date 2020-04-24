@@ -8,10 +8,10 @@
 			</dt>
 			<dd>
 				<label>
-					<input type="radio" id="enable_auto_lock" name="enable_auto_lock" value="1"{% if AUTO_LOCK_TOPICS_ENABLED %} checked="checked"{% endif %} /> {{ lang('YES') }}
+					<input type="radio" id="enable_auto_lock" name="enable_auto_lock" value="1"{% if AUTO_LOCK_TOPICS_ENABLED %} checked="checked"{% endif %}> {{ lang('YES') }}
 				</label>
 				<label>
-					<input type="radio" name="enable_auto_lock" value="0"{% if not AUTO_LOCK_TOPICS_ENABLED %} checked="checked"{% endif %} /> {{ lang('NO') }}
+					<input type="radio" name="enable_auto_lock" value="0"{% if not AUTO_LOCK_TOPICS_ENABLED %} checked="checked"{% endif %}> {{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
@@ -22,10 +22,10 @@
 			</dt>
 			<dd>
 				<label>
-					<input type="radio" id="auto_lock_announcements" name="auto_lock_announcements" value="1"{% if AUTO_LOCK_ANNOUNCEMENTS %} checked="checked"{% endif %} /> {{ lang('YES') }}
+					<input type="radio" id="auto_lock_announcements" name="auto_lock_announcements" value="1"{% if AUTO_LOCK_ANNOUNCEMENTS %} checked="checked"{% endif %}> {{ lang('YES') }}
 				</label>
 				<label>
-					<input type="radio" name="auto_lock_announcements" value="0"{% if not AUTO_LOCK_ANNOUNCEMENTS %} checked="checked"{% endif %} /> {{ lang('NO') }}
+					<input type="radio" name="auto_lock_announcements" value="0"{% if not AUTO_LOCK_ANNOUNCEMENTS %} checked="checked"{% endif %}> {{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
@@ -36,10 +36,10 @@
 			</dt>
 			<dd>
 				<label>
-					<input type="radio" id="auto_lock_stickies" name="auto_lock_stickies" value="1"{% if AUTO_LOCK_STICKIES %} checked="checked"{% endif %} /> {{ lang('YES') }}
+					<input type="radio" id="auto_lock_stickies" name="auto_lock_stickies" value="1"{% if AUTO_LOCK_STICKIES %} checked="checked"{% endif %}> {{ lang('YES') }}
 				</label>
 				<label>
-					<input type="radio" name="auto_lock_stickies" value="0"{% if not AUTO_LOCK_STICKIES %} checked="checked"{% endif %} /> {{ lang('NO') }}
+					<input type="radio" name="auto_lock_stickies" value="0"{% if not AUTO_LOCK_STICKIES %} checked="checked"{% endif %}> {{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
@@ -47,14 +47,14 @@
 		<dl>
 			<dt>
 				<label for="auto_lock_polls">{{ lang('ACP_AUTO_LOCK_POLLS') }}{{ lang('COLON') }}</label>
-				<br /><span>{{ lang('ACP_AUTO_LOCK_POLLS_EXPLAIN') }}</span>
+				<br><span>{{ lang('ACP_AUTO_LOCK_POLLS_EXPLAIN') }}</span>
 			</dt>
 			<dd>
 				<label>
-					<input type="radio" id="auto_lock_polls" name="auto_lock_polls" value="1"{% if AUTO_LOCK_POLLS %} checked="checked"{% endif %} /> {{ lang('YES') }}
+					<input type="radio" id="auto_lock_polls" name="auto_lock_polls" value="1"{% if AUTO_LOCK_POLLS %} checked="checked"{% endif %}> {{ lang('YES') }}
 				</label>
 				<label>
-					<input type="radio" name="auto_lock_polls" value="0"{% if not AUTO_LOCK_POLLS %} checked="checked"{% endif %} /> {{ lang('NO') }}
+					<input type="radio" name="auto_lock_polls" value="0"{% if not AUTO_LOCK_POLLS %} checked="checked"{% endif %}> {{ lang('NO') }}
 				</label>
 			</dd>
 		</dl>
@@ -62,20 +62,20 @@
 		<dl>
 			<dt>
 				<label for="auto_lock_days">{{ lang('ACP_AUTO_LOCK_DAYS') }}{{ lang('COLON') }}</label>
-				<br /><span>{{ lang('ACP_AUTO_LOCK_DAYS_EXPLAIN') }}</span>
+				<br><span>{{ lang('ACP_AUTO_LOCK_DAYS_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				<input type="number" id="auto_lock_days" name="auto_lock_days" min="0" max="9999" value="{% if AUTO_LOCK_DAYS %}{{ AUTO_LOCK_DAYS }}{% else %}0{% endif %}" /> {{ lang('DAYS') }}
+				<input type="number" id="auto_lock_days" name="auto_lock_days" min="0" max="9999" value="{% if AUTO_LOCK_DAYS %}{{ AUTO_LOCK_DAYS }}{% else %}0{% endif %}"> {{ lang('DAYS') }}
 			</dd>
 		</dl>
 
 		<dl>
 			<dt>
 				<label for="auto_lock_freq">{{ lang('ACP_AUTO_LOCK_FREQ') }}{{ lang('COLON') }}</label>
-				<br /><span>{{ lang('ACP_AUTO_LOCK_FREQ_EXPLAIN') }}</span>
+				<br><span>{{ lang('ACP_AUTO_LOCK_FREQ_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				<input type="number" id="auto_lock_freq" name="auto_lock_freq" min="0" max="9999" value="{% if AUTO_LOCK_FREQ %}{{ AUTO_LOCK_FREQ }}{% else %}0{% endif %}" /> {{ lang('DAYS') }}
+				<input type="number" id="auto_lock_freq" name="auto_lock_freq" min="0" max="9999" value="{% if AUTO_LOCK_FREQ %}{{ AUTO_LOCK_FREQ }}{% else %}0{% endif %}"> {{ lang('DAYS') }}
 			</dd>
 		</dl>
 	</fieldset>
