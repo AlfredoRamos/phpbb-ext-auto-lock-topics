@@ -48,10 +48,6 @@ If you like or found my work useful and want to show some appreciation, you can 
 - Go to your `Administration Control Panel` > `Customize` > `Manage extensions`
 - Click on `Enable` and confirm
 
-### Usage
-
-It will run automatically using phpBB's cron functionality.
-
 ### Preview
 
 [![Forums](https://i.imgur.com/aBjwVBpt.png)](https://i.imgur.com/aBjwVBp.png)
