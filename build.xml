@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Auto-lock Topics Extension Builder" description="Builds an extension.zip from a git repository" default="all">
+	<property name="env" value="production" />
 	<property name="vendor-name" value="alfredoramos" />
 	<property name="extension-name" value="autolocktopics" />
 	<!--
@@ -25,7 +26,15 @@
 		<delete file="${dir}/phpunit.xml.dist" />
 		<delete file="${dir}/README.md" />
 
-		<phingcall target="clean-langs" />
+		<if>
+			<and>
+				<equals arg1="${env}" arg2="production" />
+				<isset property="exclude-langs" />
+			</and>
+			<then>
+				<phingcall target="clean-langs" />
+			</then>
+		</if>
 	</target>
 
 	<!-- DO NOT EDIT BELOW THIS LINE -->
@@ -40,7 +49,7 @@
 	<target name="all" depends="prepare-structure,package" />
 
 	<!-- Remove incomplete language pack -->
-	<target name="clean-lang">
+	<target name="remove-lang">
 		<if>
 			<and>
 				<not>
@@ -56,6 +65,12 @@
 		</if>
 	</target>
 
+	<!-- Replace invalid characters in language files -->
+	<target name="clean-lang">
+		<echo msg="Replacing invalid characters: ${filename}" />
+		<exec dir="${package-directory}/language" command="sed -ri 's|'\\\\\''|’|g' ${filename}" checkreturn="true" />
+	</target>
+
 	<!-- Clean up the language directory -->
 	<target name="clean-langs">
 		<if>
@@ -63,10 +78,18 @@
 				<isfalse value="${exclude-langs}" />
 			</not>
 			<then>
-				<echo msg="Deleting incomplete languages..." />
-				<foreach list="${exclude-langs}" param="lang" target="clean-lang" />
+				<echo msg="Deleting incomplete languages" />
+				<foreach list="${exclude-langs}" param="lang" target="remove-lang" />
 			</then>
 		</if>
+
+		<foreach param="filename" target="clean-lang">
+			<fileset dir="${package-directory}/language">
+				<patternset>
+					<include name="**/*.php" />
+				</patternset>
+			</fileset>
+		</foreach>
 	</target>
 
 	<!-- Clean up the build directory -->
