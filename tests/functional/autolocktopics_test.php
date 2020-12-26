@@ -9,12 +9,10 @@
 
 namespace alfredoramos\autolocktopics\tests\functional;
 
-use phpbb_functional_test_case;
-
 /**
  * @group functional
  */
-class autolocktopics_test extends phpbb_functional_test_case
+class autolocktopics_test extends \phpbb_functional_test_case
 {
 	static protected function setup_extensions()
 	{

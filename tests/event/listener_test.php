@@ -9,7 +9,6 @@
 
 namespace alfredoramos\autolocktopics\tests\event;
 
-use phpbb_test_case;
 use alfredoramos\autolocktopics\event\listener;
 use alfredoramos\autolocktopics\includes\helper;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -17,15 +16,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * @group event
  */
-class listener_test extends phpbb_test_case
+class listener_test extends \phpbb_test_case
 {
 	/** @var \alfredoramos\autolocktopics\includes\helper */
 	protected $helper;
 
-	public function setUp(): void
+	protected function setUp(): void
 	{
 		parent::setUp();
-
 		$this->helper = $this->getMockBuilder(helper::class)
 			->disableOriginalConstructor()->getMock();
 	}
