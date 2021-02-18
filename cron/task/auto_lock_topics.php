@@ -14,13 +14,13 @@ use phpbb\cron\task\base as task_base;
 
 class auto_lock_topics extends task_base
 {
-	/** @var \alfredoramos\autolocktopics\includes\helper */
+	/** @var helper */
 	protected $helper;
 
 	/**
 	 * Cron task constructor.
 	 *
-	 * @param \alfredoramos\autolocktopics\includes\helper	$helper
+	 * @param helper $helper
 	 *
 	 * @return void
 	 */
