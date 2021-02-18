@@ -17,19 +17,19 @@ use phpbb\event\dispatcher_interface as dispatcher;
 
 class helper
 {
-	/** @var \phpbb\db\driver\factory */
+	/** @var database */
 	protected $db;
 
-	/** @var \phpbb\log\log */
+	/** @var log */
 	protected $log;
 
-	/** @var \phpbb\user */
+	/** @var user */
 	protected $user;
 
-	/** @var \phpbb\request\request */
+	/** @var request */
 	protected $request;
 
-	/** @var \phpbb\event\dispatcher_interface */
+	/** @var dispatcher */
 	protected $dispatcher;
 
 	/** @var array */
@@ -38,13 +38,13 @@ class helper
 	/**
 	 * Constructor of the helper class.
 	 *
-	 * @param \phpbb\db\driver\factory			$db
-	 * @param \phpbb\log\log					$log
-	 * @param \phpbb\user						$user
-	 * @param \phpbb\request\request			$request
-	 * @param \phpbb\event\dispatcher_interface	$dispatcher
-	 * @param string							$forums_table
-	 * @param string							$topics_table
+	 * @param database		$db
+	 * @param log			$log
+	 * @param user			$user
+	 * @param request		$request
+	 * @param dispatcher	$dispatcher
+	 * @param string		$forums_table
+	 * @param string		$topics_table
 	 *
 	 * @return void
 	 */

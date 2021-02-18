@@ -1,4 +1,4 @@
-name: GitHub Actions CI
+name: CI
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
   SNIFF: 1
   IMAGE_ICC: 1
   EPV: 1
-  EXECUTABLE_FILES: 0
+  EXECUTABLE_FILES: 1
   EXTDEPS: 0
   PHPBB_BRANCH: 3.3.x
 
@@ -91,9 +91,9 @@ jobs:
           - php-version: '8.0'
             db-type: 'mariadb'
             db-version: '10.5'
-          - php-version: '8.1'
-            db-type: 'mariadb'
-            db-version: '10.5'
+          #- php-version: '8.1'
+          #  db-type: 'mariadb'
+          #  db-version: '10.5'
     steps:
       - name: Checkout phpBB
         uses: actions/checkout@master

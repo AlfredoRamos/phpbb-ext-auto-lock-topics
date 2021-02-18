@@ -14,13 +14,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
-	/** @var \alfredoramos\autolocktopics\includes\helper */
+	/** @var helper */
 	protected $helper;
 
 	/**
 	 * Event listener constructor.
 	 *
-	 * @param \alfredoramos\autolocktopics\includes\helper $helper
+	 * @param helper $helper
 	 *
 	 * @return void
 	 */
