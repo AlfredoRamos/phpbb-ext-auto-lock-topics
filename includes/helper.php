@@ -95,7 +95,8 @@ class helper
 
 		$sql = 'SELECT forum_id, forum_name, enable_auto_lock, auto_lock_flags, auto_lock_next, auto_lock_days, auto_lock_freq
 			FROM ' . $this->tables['forums'] . '
-			WHERE enable_auto_lock = 1';
+			WHERE enable_auto_lock = 1
+			ORDER BY forum_last_post_time DESC';
 
 		// Get a specific row
 		if ($options['forum_id'] > 0)
@@ -240,7 +241,8 @@ class helper
 		// Get topic list
 		$sql_select = 'SELECT topic_id
 			FROM ' . $this->tables['topics'] . '
-			WHERE ' . $sql_where;
+			WHERE ' . $sql_where . '
+			ORDER BY topic_time DESC';
 		$result = $this->db->sql_query_limit($sql_select, $limit, 0, $cache_time);
 		$topics = $this->db->sql_fetchrowset($result);
 		$this->db->sql_freeresult($result);
