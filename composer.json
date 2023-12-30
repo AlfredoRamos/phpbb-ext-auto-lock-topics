@@ -5,12 +5,18 @@
 	"homepage": "https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics",
 	"version": "1.2.0",
 	"time": "2020-01-06",
-	"keywords": ["phpbb", "extension", "auto-lock", "topics", "cron"],
+	"keywords": [
+		"phpbb",
+		"extension",
+		"auto-lock",
+		"topics",
+		"cron"
+	],
 	"license": "GPL-2.0-only",
 	"authors": [
 		{
 			"name": "Alfredo Ramos",
-			"email": "alfredo.ramos@protonmail.com",
+			"email": "alfredo.ramos@skiff.com",
 			"homepage": "https://alfredoramos.mx/",
 			"role": "Lead Developer"
 		}
