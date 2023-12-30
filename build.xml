@@ -17,6 +17,7 @@
 	<target name="clean-package">
 		<delete dir="${dir}/tests" />
 		<delete dir="${dir}/.github" />
+		<delete dir="${dir}/.vscode"/>
 		<delete file="${dir}/.gitignore" />
 		<delete file="${dir}/.gitattributes" />
 		<delete file="${dir}/build.xml" />
