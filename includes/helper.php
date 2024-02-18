@@ -2,7 +2,7 @@
 
 /**
  * Auto-lock Topics extension for phpBB.
- * @author Alfredo Ramos <alfredo.ramos@skiff.com>
+ * @author Alfredo Ramos <alfredo.ramos@proton.me>
  * @copyright 2017 Alfredo Ramos
  * @license GPL-2.0-only
  */
@@ -57,8 +57,7 @@ class helper
 		$this->dispatcher = $dispatcher;
 
 		// Assign tables
-		if (empty($this->tables))
-		{
+		if (empty($this->tables)) {
 			$this->tables = [
 				'forums' => $forums_table,
 				'topics' => $topics_table
@@ -88,8 +87,7 @@ class helper
 		$options['limit'] = (int) $options['limit'];
 
 		// At least one of the two options must be given
-		if ($options['forum_id'] <= 0 && $options['auto_lock_next'] <= 0)
-		{
+		if ($options['forum_id'] <= 0 && $options['auto_lock_next'] <= 0) {
 			return [];
 		}
 
@@ -99,14 +97,12 @@ class helper
 			ORDER BY forum_last_post_time DESC';
 
 		// Get a specific row
-		if ($options['forum_id'] > 0)
-		{
+		if ($options['forum_id'] > 0) {
 			$sql .= ' AND forum_id = ' . $options['forum_id'];
 		}
 
 		// Get rows older than the given date
-		if ($options['auto_lock_next'] > 0)
-		{
+		if ($options['auto_lock_next'] > 0) {
 			$sql .= ' AND auto_lock_next < ' . $options['auto_lock_next'];
 		}
 
@@ -127,8 +123,7 @@ class helper
 	 */
 	public function auto_lock($forum = [], $limit = 0)
 	{
-		if (empty($forum))
-		{
+		if (empty($forum)) {
 			return;
 		}
 
@@ -156,8 +151,7 @@ class helper
 			(time() + ($forum['auto_lock_freq'] * $day))
 		);
 
-		if ($locked)
-		{
+		if ($locked) {
 			// Add an entry in the admin log
 			$this->log->add(
 				'admin',
@@ -189,8 +183,7 @@ class helper
 		$limit = (int) $limit;
 
 		// Invalid forum ID
-		if ($forum_id <= 0)
-		{
+		if ($forum_id <= 0) {
 			return false;
 		}
 
@@ -198,15 +191,13 @@ class helper
 		$ignore = [];
 
 		// Check if announcements auto-lock is disabled
-		if (!($flags & FORUM_FLAG_PRUNE_ANNOUNCE))
-		{
+		if (!($flags & FORUM_FLAG_PRUNE_ANNOUNCE)) {
 			$ignore[] = POST_ANNOUNCE;
 			$ignore[] = POST_GLOBAL;
 		}
 
 		// Check if stickies auto-lock is disabled
-		if (!($flags & FORUM_FLAG_PRUNE_STICKY))
-		{
+		if (!($flags & FORUM_FLAG_PRUNE_STICKY)) {
 			$ignore[] = POST_STICKY;
 		}
 
@@ -215,8 +206,7 @@ class helper
 			AND topic_status = ' . ITEM_UNLOCKED;
 
 		// Check if is announcements or stickies auto-lock is disabled
-		if (!empty($ignore))
-		{
+		if (!empty($ignore)) {
 			$sql_where .= ' AND ' . $this->db->sql_in_set('topic_type', $ignore, true);
 		}
 
@@ -226,8 +216,7 @@ class helper
 			AND topic_last_post_time < ' . $lock_date . ')';
 
 		// Check if is a poll and polls auto-lock is enabled
-		if ($flags & FORUM_FLAG_PRUNE_POLL)
-		{
+		if ($flags & FORUM_FLAG_PRUNE_POLL) {
 			$sql_where .= ' OR (poll_start > 0
 				AND poll_last_vote < ' . $lock_date . ')';
 		}
@@ -249,14 +238,12 @@ class helper
 		$topic_ids = [];
 
 		// Get topic ID list
-		foreach ($topics as $topic)
-		{
+		foreach ($topics as $topic) {
 			$topic_ids[] = (int) $topic['topic_id'];
 		}
 
 		// There were no topics to lock
-		if (empty($topic_ids))
-		{
+		if (empty($topic_ids)) {
 			return false;
 		}
 
@@ -299,8 +286,7 @@ class helper
 
 		// Forum ID must exist and next lock date
 		// must be in the future
-		if ($forum_id <= 0 || $next_lock <= time())
-		{
+		if ($forum_id <= 0 || $next_lock <= time()) {
 			return;
 		}
 
@@ -322,20 +308,17 @@ class helper
 		$auto_lock_flags = 0;
 
 		// Announcements auto-lock is enabled
-		if ($this->request->variable('auto_lock_announcements', 0))
-		{
+		if ($this->request->variable('auto_lock_announcements', 0)) {
 			$auto_lock_flags += FORUM_FLAG_PRUNE_ANNOUNCE;
 		}
 
 		// Stickies auto-lock is enabled
-		if ($this->request->variable('auto_lock_stickies', 0))
-		{
+		if ($this->request->variable('auto_lock_stickies', 0)) {
 			$auto_lock_flags += FORUM_FLAG_PRUNE_STICKY;
 		}
 
 		// Polls auto-lock is enabled
-		if ($this->request->variable('auto_lock_polls', 0))
-		{
+		if ($this->request->variable('auto_lock_polls', 0)) {
 			$auto_lock_flags += FORUM_FLAG_PRUNE_POLL;
 		}
 

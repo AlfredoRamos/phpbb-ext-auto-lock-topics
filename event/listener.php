@@ -2,7 +2,7 @@
 
 /**
  * Auto-lock Topics extension for phpBB.
- * @author Alfredo Ramos <alfredo.ramos@skiff.com>
+ * @author Alfredo Ramos <alfredo.ramos@proton.me>
  * @copyright 2017 Alfredo Ramos
  * @license GPL-2.0-only
  */
@@ -68,8 +68,7 @@ class listener implements EventSubscriberInterface
 	 */
 	public function manage_forums_initialise_data($event)
 	{
-		if (!in_array($event['action'], ['add', 'edit']))
-		{
+		if (!in_array($event['action'], ['add', 'edit'])) {
 			return;
 		}
 

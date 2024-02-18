@@ -2,7 +2,7 @@
 
 /**
  * Auto-lock Topics extension for phpBB.
- * @author Alfredo Ramos <alfredo.ramos@skiff.com>
+ * @author Alfredo Ramos <alfredo.ramos@proton.me>
  * @copyright 2017 Alfredo Ramos
  * @license GPL-2.0-only
  */
@@ -40,14 +40,12 @@ class auto_lock_topics extends task_base
 		$forums = $this->helper->forum_data(['limit' => 150]);
 
 		// Stop execution if there's no forums to lock
-		if (empty($forums))
-		{
+		if (empty($forums)) {
 			return;
 		}
 
 		// Iterate over each forum to lock its topics
-		foreach ($forums as $forum)
-		{
+		foreach ($forums as $forum) {
 			$this->helper->auto_lock($forum, 300);
 		}
 	}
