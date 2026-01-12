@@ -33,7 +33,7 @@ class helper
 	protected $dispatcher;
 
 	/** @var array */
-	protected $tables;
+	protected $table = [];
 
 	/**
 	 * Constructor of the helper class.
@@ -48,7 +48,7 @@ class helper
 	 *
 	 * @return void
 	 */
-	public function __construct(database $db, log $log, user $user, request $request, dispatcher $dispatcher, $forums_table, $topics_table)
+	public function __construct(database $db, log $log, user $user, request $request, dispatcher $dispatcher, string $forums_table, string $topics_table)
 	{
 		$this->db = $db;
 		$this->log = $log;
@@ -72,7 +72,7 @@ class helper
 	 *
 	 * @return array
 	 */
-	public function forum_data($options = [])
+	public function forum_data(array $options = []): array
 	{
 		// Merge default options with given options
 		$options = array_merge([
@@ -121,7 +121,7 @@ class helper
 	 *
 	 * @return void
 	 */
-	public function auto_lock($forum = [], $limit = 0)
+	public function auto_lock(array $forum = [], int $limit = 0)
 	{
 		if (empty($forum)) {
 			return;
@@ -174,7 +174,7 @@ class helper
 	 *
 	 * @return bool
 	 */
-	protected function lock_topics($forum_id = 0, $flags = 0, $lock_date = 0, $limit = 0)
+	protected function lock_topics(int $forum_id = 0, int $flags = 0, int $lock_date = 0, int $limit = 0): bool
 	{
 		// Cast parameters
 		$forum_id = (int) $forum_id;
@@ -278,7 +278,7 @@ class helper
 	 *
 	 * @return void
 	 */
-	protected function update_next_lock_date($forum_id = 0, $next_lock = 0)
+	protected function update_next_lock_date(int $forum_id = 0, int $next_lock = 0)
 	{
 		// Cast parameters
 		$forum_id = (int) $forum_id;
@@ -302,7 +302,7 @@ class helper
 	 *
 	 * @return array
 	 */
-	public function form_forum_data()
+	public function form_forum_data(): array
 	{
 		// Auto-lock flags
 		$auto_lock_flags = 0;
