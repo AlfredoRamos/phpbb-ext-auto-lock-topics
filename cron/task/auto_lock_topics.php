@@ -40,12 +40,14 @@ class auto_lock_topics extends task_base
 		$forums = $this->helper->forum_data(['limit' => 150]);
 
 		// Stop execution if there's no forums to lock
-		if (empty($forums)) {
+		if (empty($forums))
+		{
 			return;
 		}
 
 		// Iterate over each forum to lock its topics
-		foreach ($forums as $forum) {
+		foreach ($forums as $forum)
+		{
 			$this->helper->auto_lock($forum, 300);
 		}
 	}

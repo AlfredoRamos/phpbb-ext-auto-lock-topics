@@ -21,7 +21,8 @@ class autolocktopics_test extends \phpbb_functional_test_case
 
 	protected function acp_form_test($uri = '')
 	{
-		if (empty($uri)) {
+		if (empty($uri))
+		{
 			$this->markTestIncomplete('The URI cannot be empty');
 			return;
 		}

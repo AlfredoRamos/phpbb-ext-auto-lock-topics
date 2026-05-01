@@ -68,7 +68,8 @@ class listener implements EventSubscriberInterface
 	 */
 	public function manage_forums_initialise_data($event)
 	{
-		if (!in_array($event['action'], ['add', 'edit'])) {
+		if (!in_array($event['action'], ['add', 'edit']))
+		{
 			return;
 		}
 
