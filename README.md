@@ -3,7 +3,7 @@
 Auto-lock Topics extension for phpBB
 
 [![Build Status](https://img.shields.io/github/workflow/status/AlfredoRamos/phpbb-ext-auto-lock-topics/GitHub%20Actions%20CI?style=flat-square)](https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics/actions)
-[![Latest Stable Version](https://img.shields.io/github/tag/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?label=stable&style=flat-square)](https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics/releases)
+[![Latest Stable Version](https://img.shields.io/github/tag/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?label=stable&style=flat-square)](https://www.phpbb.com/customise/db/extension/auto_lock_topics/)
 [![Code Quality](https://img.shields.io/codacy/grade/1b2cb6aeb1214d80afbc800e31de36a0.svg?style=flat-square)](https://app.codacy.com/manual/AlfredoRamos/phpbb-ext-auto-lock-topics/dashboard)
 [![Translation Progress](https://badges.crowdin.net/phpbb-ext-auto-lock-topics/localized.svg)](https://crowdin.com/project/phpbb-ext-auto-lock-topics)
 [![License](https://img.shields.io/github/license/AlfredoRamos/phpbb-ext-auto-lock-topics.svg?style=flat-square)](https://raw.githubusercontent.com/AlfredoRamos/phpbb-ext-auto-lock-topics/main/license.txt)
@@ -22,7 +22,7 @@ It will automatically lock old topics using phpBB’s cron functionality.
 
 ### Requirements
 
-- PHP 7.1.3 or greater
+- PHP 8.1.0 or greater
 - phpBB 3.3 or greater
 
 ### Support
@@ -42,20 +42,15 @@ If you like or found my work useful and want to show some appreciation, you can 
 
 ### Installation
 
-- Download the [latest release](https://github.com/AlfredoRamos/phpbb-ext-auto-lock-topics/releases)
-- Decompress the `*.zip` or `*.tar.gz` file
+- Download the [latest release](https://www.phpbb.com/customise/db/extension/auto_lock_topics/)
+- Decompress the `*.zip`
 - Copy the files and directories inside `{PHPBB_ROOT}/ext/alfredoramos/autolocktopics/`
 - Go to your `Administration Control Panel` > `Customize` > `Manage extensions`
 - Click on `Enable` and confirm
 
 ### Preview
 
-[![Forums](https://i.imgur.com/aBjwVBpt.png)](https://i.imgur.com/aBjwVBp.png)
-[![Forum settings](https://i.imgur.com/mBCEbSft.png)](https://i.imgur.com/mBCEbSf.png)
-[![Topics loked](https://i.imgur.com/uM7dkoGt.png)](https://i.imgur.com/uM7dkoG.png)
-[![Admin log](https://i.imgur.com/PIOhYf7t.png)](https://i.imgur.com/PIOhYf7.png)
-
-*(Click to view in full size)*
+See the [full blog post](https://alfredoramos.mx/auto-lock-topics-extension-for-phpbb/) for the screenshots gallery.
 
 ### Configuration
 
